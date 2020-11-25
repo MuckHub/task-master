@@ -1,10 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
+import { AccountName } from './ComponentMain/AccountName'
 
 export default function MainScreen({ navigation }) {
   return (
     <View style={styles.container}>
-      <Text>Main screen!!!</Text>
+      <AccountName />
       <Button title='Group' onPress={() => navigation.navigate('Group')} />
     </View>
   );
@@ -14,7 +15,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });
