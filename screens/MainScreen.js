@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
-import { AccountName } from './ComponentMain/AccountName'
+import { AccountName } from '../compenents/ComponentMain/AccountName'
 
 export default function MainScreen({ navigation }) {
   return (
