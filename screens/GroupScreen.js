@@ -1,5 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
+import GroupTasks from '../compenents/ComponentsGroupScreen/GroupTasks';
+import AllTasks from '../compenents/ComponentsGroupScreen/AllTasks'
 
 export default function GroupScreen({ navigation }) {
   return (
@@ -11,6 +13,9 @@ export default function GroupScreen({ navigation }) {
       />
       <Button title='Task1' onPress={() => navigation.navigate('Task')} />
       <Button title='Task2' onPress={() => navigation.navigate('Task')} />
+      <AllTasks />
+      <GroupTasks />
+
     </View>
   );
 }
