@@ -1,29 +1,60 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { useDispatch } from 'react-redux';
+import { StyleSheet, Text, View, Button, ScrollView } from 'react-native';
 import { AccountName } from '../compenents/ComponentMain/AccountName'
 import { Groups } from '../compenents/ComponentMain/Groups'
 import GroupPicture from '../compenents/ComponentMain/GroupPicture' 
 import GroupContainer from '../compenents/ComponentMain/GroupContainer'
+import { addGroupsMainAC } from "../redux/actions";
 
 export default function MainScreen({ navigation }) {
-  const user = useSelector((store) => store.isAuth);
+  
+  const user = /* useSelector((store) => store.isAuth); */'Anton'
+  const dispatch = useDispatch();
+  console.log('user MainScreen >>>>', user);
+  let groupsStore = useSelector((store) => store.groups);
+  console.log('groupsStore >>>>', groupsStore);
 
+  async function getGroups() {
+    const response = await fetch(`http://192.168.43.13:3100/account`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ user }),
+    });
+  
+    const groups = await response.json();
+    console.log('groups  >>>>', groups);
+    dispatch(addGroupsMainAC(groups));
+    
+  }
+  
+  useEffect(() => {
+    getGroups()
+  }, [])
+  console.log('***************');
   return (
-    <View style={styles.container}>
-
-    <Text>Main screen!!! {user}</Text>
-     <Button title='LOGOUT' onPress={() => navigation.navigate('Auth')} />
+  
+    < ScrollView style={styles.container} >
+      {groupsStore !== undefined && 
+        < ScrollView style={styles.container} >
+      <Text>Main screen!!! {user}</Text>
+      <Button title='LOGOUT' onPress={() => navigation.navigate('Auth')} />
       <AccountName />
       <Button title='Group' onPress={() => navigation.navigate('Group')} />
       <Groups />
       <GroupContainer>
-        <GroupPicture />
-        <GroupPicture />
-        <GroupPicture />
-        <GroupPicture />
-      </GroupContainer>
-    </View>
+        {groupsStore.map((el) => {
+          return (
+            <GroupPicture name={el.groupName} />
+          )
+        })}
+        </GroupContainer>
+        </ScrollView>
+      }
+    </ScrollView >
   );
 }
 

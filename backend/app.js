@@ -9,6 +9,7 @@ const dbConnect = require('./src/config/dbConnect');
 const PORT = process.env.PORT || 3100;
 const cors = require('cors');
 const User = require('./src/models/user.model');
+const accountRouter = require('./src/routes/account')
 
 dbConnect();
 app.set('session cookie name', 'sid');
@@ -35,6 +36,8 @@ app.post('/auth', async (req, res) => {
     res.status(404).send('Something went wrong');
   }
 });
+
+app.use('/account', accountRouter)
 
 app.listen(PORT, () => {
   console.log('Server has been started on port: ', PORT);
