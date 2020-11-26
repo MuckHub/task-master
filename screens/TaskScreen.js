@@ -1,10 +1,16 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
+import TaskName from '../compenents/ComponentsTaskScreen/TaskName';
+import TaskImage from '../compenents/ComponentsTaskScreen/TaskImage';
+import TaskDescription from '../compenents/ComponentsTaskScreen/TaskDescription';
 
 export default function TaskScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <Text>Task Screen</Text>
+      <TaskName />
+      <TaskImage />
+      <TaskDescription />
     </View>
   );
 }
