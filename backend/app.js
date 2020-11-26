@@ -36,6 +36,27 @@ app.post('/auth', async (req, res) => {
   }
 });
 
+app.post('/register', async (req, res) => {
+  const {login, pass} = req.body;
+  console.log(login, pass);
+  try {
+    console.log('req.body', req.body);
+
+    let newUser = User.create({
+      login,
+      password: pass,
+    })
+
+    return res.json({
+      login: newUser.login,
+      status: 'ok',
+    })
+
+  } catch (error) {
+    return res.json({error: 'Oops!'});
+  }
+});
+
 app.listen(PORT, () => {
   console.log('Server has been started on port: ', PORT);
 });
