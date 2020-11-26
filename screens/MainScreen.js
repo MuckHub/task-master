@@ -16,15 +16,13 @@ export default function MainScreen({ navigation }) {
   const user = useSelector((store) => store.isAuth);
 
   return (
-
     <ScrollView style={styles.container}>
-
       <AccountName />
-      <Text>Main screen!!! {user}</Text>
+
       <Button title='LOGOUT' onPress={() => navigation.navigate('Auth')} />
       <Button title='Group' onPress={() => navigation.navigate('Group')} />
       <Groups />
-     <Button title='LOGOUT' onPress={() => navigation.navigate('Auth')} />
+
       <GroupContainer>
         <GroupPicture />
         <GroupPicture />

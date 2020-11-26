@@ -9,7 +9,7 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { isAuthAC } from '../redux/actions'; 
+import { isAuthAC } from '../redux/actions';
 
 export default function AuthScreen({ navigation }) {
   const [error, setError] = useState(null);
@@ -35,14 +35,14 @@ export default function AuthScreen({ navigation }) {
     if (data.status === 401) setError('Invalid password or login!');
     if (data.status === 400) setError('Please fill all the forms');
     if (data.status === 200) {
-      navigation.navigate('Main');
       dispatch(isAuthAC(login));
+      navigation.navigate('Main');
     }
     setLogin('');
     setPass('');
   };
 
-return (
+  return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <View style={styles.container}>
         <Text>Sign In:</Text>
@@ -72,7 +72,7 @@ return (
       </View>
     </TouchableWithoutFeedback>
   );
-}  
+}
 
 const styles = StyleSheet.create({
   container: {
