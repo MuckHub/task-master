@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+
 import { useDispatch } from 'react-redux';
 import { StyleSheet, Text, View, Button, ScrollView } from 'react-native';
 import { AccountName } from '../compenents/ComponentMain/AccountName'
@@ -7,6 +8,11 @@ import { Groups } from '../compenents/ComponentMain/Groups'
 import GroupPicture from '../compenents/ComponentMain/GroupPicture' 
 import GroupContainer from '../compenents/ComponentMain/GroupContainer'
 import { addGroupsMainAC } from "../redux/actions";
+
+import { NavigationContainer } from '@react-navigation/native';
+import GroupScreen from '../screens/GroupScreen';
+import BottomTab from '../navigation/BottomTab';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 export default function MainScreen({ navigation }) {
   
@@ -36,16 +42,24 @@ export default function MainScreen({ navigation }) {
   }, [])
   console.log('***************');
   return (
+
   
     < ScrollView style={styles.container} >
       {groupsStore !== undefined && 
         < ScrollView style={styles.container} >
       <Text>Main screen!!! {user}</Text>
       <Button title='LOGOUT' onPress={() => navigation.navigate('Auth')} />
+
+   
+
       <AccountName />
+
+      <Button title='LOGOUT' onPress={() => navigation.navigate('Auth')} />
       <Button title='Group' onPress={() => navigation.navigate('Group')} />
       <Groups />
+
       <GroupContainer>
+
         {groupsStore.map((el) => {
           return (
             <GroupPicture name={el.groupName} />
@@ -55,6 +69,7 @@ export default function MainScreen({ navigation }) {
         </ScrollView>
       }
     </ScrollView >
+
   );
 }
 

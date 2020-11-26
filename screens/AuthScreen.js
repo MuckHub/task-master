@@ -36,8 +36,8 @@ export default function AuthScreen({ navigation }) {
     if (data.status === 401) setError('Invalid password or login!');
     if (data.status === 400) setError('Please fill all the forms');
     if (data.status === 200) {
-      navigation.navigate('Main');
       dispatch(isAuthAC(login));
+      navigation.navigate('Main');
     }
     setLogin('');
     setPass('');

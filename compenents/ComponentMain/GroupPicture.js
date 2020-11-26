@@ -1,11 +1,13 @@
 import React from 'react';
+
 import { StyleSheet, ScrollView  } from 'react-native';
 import { Image, Text } from "react-native-elements";
+
 
 const styles = StyleSheet.create({
   picture: {
     padding: 25,
-  }
+  },
 });
 
 export default function GroupPicture(props) {

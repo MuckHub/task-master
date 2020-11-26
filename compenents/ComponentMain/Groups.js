@@ -2,11 +2,11 @@ import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 // import { Image } from "react-native-elements";
 
-export const Groups = () => {
+export const Groups = ({ navigation }) => { 
   return (
     <View style={styles.text}>
         <Text style={styles.accountName}>Groups</Text>
-        <TouchableOpacity style={styles.roundButton1}><Text>+</Text></TouchableOpacity>
+        <TouchableOpacity title='Group' onPress={() => navigation.navigate('Group')} style={styles.roundButton1} onPress={() => navigation.navigate('Group')}><Text>+</Text></TouchableOpacity>
     </View>
   )
 }

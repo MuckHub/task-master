@@ -1,4 +1,6 @@
-import { IS_AUTH, GROUPS_MAIN } from './types';
+
+import { IS_AUTH, GROUPS_MAIN, SIGN_UP } from './types';
+
 
 export const reducers = (state = { isAuth: null }, action) => {
   switch (action.type) {
@@ -11,6 +13,10 @@ export const reducers = (state = { isAuth: null }, action) => {
       console.log('action.payload', action.payload);
       return { ...state, groups: action.payload.groups };
     
+
+    case SIGN_UP:
+      
+      return { ...state, isAuth: action.payload.login}
 
     default:
       return state;
