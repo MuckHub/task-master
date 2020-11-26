@@ -11,7 +11,7 @@ import MainStackNavigator from './navigation/StackNavigation';
 const Stack = createStackNavigator();
 
 export default function App() {
-  const [isAuth, setIsAuth] = useState(false);
+  const [isAuth, setIsAuth] = useState(true);
 
   return (
     <Provider store={store}>
