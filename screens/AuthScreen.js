@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { isAuthAC } from '../redux/actions';
+import { addGroupsMainAC } from "../redux/actions";
 
 export default function AuthScreen({ navigation }) {
   const [error, setError] = useState(null);
@@ -21,7 +22,7 @@ export default function AuthScreen({ navigation }) {
   const authHandler = async () => {
     console.log(login, pass);
     setError(null);
-    let response = await fetch('http://localhost:3100/auth', {
+    let response = await fetch('http://192.168.43.13:3100/auth', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -30,7 +31,7 @@ export default function AuthScreen({ navigation }) {
     });
 
     const data = await response;
-    console.log(data.status);
+    console.log('data authHandler >>>>>', data);
 
     if (data.status === 401) setError('Invalid password or login!');
     if (data.status === 400) setError('Please fill all the forms');
