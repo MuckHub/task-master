@@ -9,6 +9,7 @@ export default function MainScreen({ navigation }) {
     <View style={styles.container}>
       <Text>Main screen!!! {user}</Text>
       <Button title='Group' onPress={() => navigation.navigate('Group')} />
+      <Button title='LOGOUT' onPress={() => navigation.navigate('Auth')} />
     </View>
   );
 }

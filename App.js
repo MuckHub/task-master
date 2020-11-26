@@ -24,7 +24,7 @@ export default function App() {
           <Stack.Screen
             name='Main'
             component={MainScreen}
-            options={{ headerShown: false, gestureEnabled: true }}
+            options={{ headerShown: false, gestureEnabled: false }}
           />
           <Stack.Screen name='Task' component={TaskScreen} />
           <Stack.Screen name='Group' component={GroupScreen} />
