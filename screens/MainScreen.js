@@ -13,10 +13,10 @@ export default function MainScreen({ navigation }) {
     <View style={styles.container}>
 
     <Text>Main screen!!! {user}</Text>
-     <Button title='LOGOUT' onPress={() => navigation.navigate('Auth')} />
       <AccountName />
       <Button title='Group' onPress={() => navigation.navigate('Group')} />
       <Groups />
+     <Button title='LOGOUT' onPress={() => navigation.navigate('Auth')} />
       <GroupContainer>
         <GroupPicture />
         <GroupPicture />

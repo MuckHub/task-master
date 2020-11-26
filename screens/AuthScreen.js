@@ -9,7 +9,7 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { isAuthAC } from '../redux/actions';
+import { isAuthAC } from '../redux/actions'; 
 
 export default function AuthScreen({ navigation }) {
   const [error, setError] = useState(null);
@@ -42,7 +42,7 @@ export default function AuthScreen({ navigation }) {
     setPass('');
   };
 
-  return (
+return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <View style={styles.container}>
         <Text>Sign In:</Text>
@@ -72,7 +72,7 @@ export default function AuthScreen({ navigation }) {
       </View>
     </TouchableWithoutFeedback>
   );
-}
+}  
 
 const styles = StyleSheet.create({
   container: {
