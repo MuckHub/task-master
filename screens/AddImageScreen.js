@@ -55,7 +55,6 @@ export default function AddImageScreen({ navigation: { goBack } }) {
 
   return (
     <View style={styles.wrapper}>
-      <Text>Add Image Screen</Text>
       {!image && <Button title='Take a Picture' onPress={takePhoto} />}
       {image && <Image style={styles.image} source={{ uri: image }} />}
       {image && <Button title='Add' onPress={addPicture} />}

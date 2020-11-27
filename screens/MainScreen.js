@@ -18,10 +18,7 @@ export default function MainScreen({ navigation }) {
   const user = useSelector((store) => store.isAuth);
   const dispatch = useDispatch();
 
-
   let groupsStore = useSelector((store) => store.groups);
-
-
 
   async function getGroups() {
     const response = await fetch('http://192.168.0.108:3100/account', {
@@ -33,8 +30,6 @@ export default function MainScreen({ navigation }) {
     });
 
     const groups = await response.json();
-
-
 
     dispatch(addGroupsMainAC(groups));
   }
@@ -49,12 +44,14 @@ export default function MainScreen({ navigation }) {
         <ScrollView style={styles.container}>
           <AccountName />
           <Button title='LOGOUT' onPress={() => navigation.navigate('Auth')} />
-          <Button title='Group' onPress={() => navigation.navigate('Group')} />
+
           <Groups />
 
           <GroupContainer>
             {groupsStore.map((el) => {
-              return <GroupPicture name={el.groupName} navigation={navigation}/>;
+              return (
+                <GroupPicture name={el.groupName} navigation={navigation} />
+              );
             })}
           </GroupContainer>
         </ScrollView>

@@ -11,22 +11,18 @@ const styles = StyleSheet.create({
   },
 });
 
-
 export default function GroupPicture({ name, navigation }) {
   const dataFromRedux = useSelector((store) => store);
   const dispatch = useDispatch();
 
   function getGroupName() {
     dispatch(getGroupNameAC(name));
-    navigation.navigate('Group')
+    navigation.navigate('Group');
   }
 
-
-  
   return (
     <ScrollView style={styles.picture}>
-
-      <Text style={styles.text}>{props.name}</Text>
+      <Text style={styles.text}>{name}</Text>
 
       <Image
         onPress={() => getGroupName()}

@@ -4,15 +4,13 @@ import TaskName from '../compenents/ComponentsTaskScreen/TaskName';
 import TaskImage from '../compenents/ComponentsTaskScreen/TaskImage';
 import TaskDescription from '../compenents/ComponentsTaskScreen/TaskDescription';
 
-
 export default function TaskScreen({ route, navigation }) {
-  const {taskName}=route.params;
-
+  const { taskName } = route.params;
 
   return (
     <View style={styles.container}>
       <Button title='ADD' onPress={() => navigation.navigate('AddImage')} />
-      <Text>Task Screen</Text>
+
       <TaskName />
       <TaskImage />
       <TaskDescription />
