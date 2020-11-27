@@ -11,6 +11,7 @@ const styles = StyleSheet.create({
   },
 });
 
+
 export default function GroupPicture({ name, navigation }) {
   const dataFromRedux = useSelector((store) => store);
   const dispatch = useDispatch();
@@ -20,6 +21,8 @@ export default function GroupPicture({ name, navigation }) {
     navigation.navigate('Group')
   }
 
+
+  
   return (
     <ScrollView style={styles.picture}>
 
@@ -30,8 +33,6 @@ export default function GroupPicture({ name, navigation }) {
         source={'http://placeimg.com/640/480/nature'}
         style={{ width: 150, height: 150 }}
       />
-     
     </ScrollView>
   );
 }
-

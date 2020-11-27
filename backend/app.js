@@ -9,7 +9,8 @@ const dbConnect = require('./src/config/dbConnect');
 const PORT = process.env.PORT || 3100;
 const cors = require('cors');
 const User = require('./src/models/user.model');
-const accountRouter = require('./src/routes/account')
+const Tasks = require('./src/models/task.model');
+const accountRouter = require('./src/routes/account');
 
 const groupTasksRouter = require('./src/routes/getTasks')
 
@@ -43,31 +44,58 @@ app.post('/auth', async (req, res) => {
 });
 
 
+
 app.use('/account', accountRouter)
 app.use('/taskName', taskNameRouter)
 
+
 app.post('/register', async (req, res) => {
-  const {login, pass} = req.body;
-  console.log(login, pass);
+  const { login, pass } = req.body;
+
   try {
     console.log('req.body', req.body);
 
     let newUser = User.create({
       login,
       password: pass,
-    })
+    });
 
     return res.json({
       login: newUser.login,
       status: 'ok',
-    })
-
+    });
   } catch (error) {
-    return res.json({error: 'Oops!'});
+    return res.json({ error: 'Oops!' });
+  }
+});
+
+
+app.post('/addImg', async (req, res) => {
+  const { taskName, user, imgUrl } = req.body;
+  console.log(req.body);
+
+  try {
+    await Tasks.updateOne(
+      { name: taskName },
+      {
+        $push: {
+          post: {
+            login: user,
+            image: imgUrl,
+            likesCount: 0,
+          },
+        },
+      }
+    );
+
+    res.end();
+  } catch (error) {
+    res.end();
   }
 });
 
 app.use('/groupTasks', groupTasksRouter)
+
 
 
 app.listen(PORT, () => {
