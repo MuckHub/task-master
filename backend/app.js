@@ -10,6 +10,7 @@ const PORT = process.env.PORT || 3100;
 const cors = require('cors');
 const User = require('./src/models/user.model');
 const accountRouter = require('./src/routes/account')
+const taskNameRouter = require('./src/routes/taskName')
 
 dbConnect();
 app.set('session cookie name', 'sid');
@@ -39,6 +40,7 @@ app.post('/auth', async (req, res) => {
 
 
 app.use('/account', accountRouter)
+app.use('/taskName', taskNameRouter)
 
 app.post('/register', async (req, res) => {
   const {login, pass} = req.body;
