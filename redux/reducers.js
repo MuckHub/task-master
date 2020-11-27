@@ -1,5 +1,5 @@
 
-import { IS_AUTH, GROUPS_MAIN, SIGN_UP } from './types';
+import { IS_AUTH, GROUPS_MAIN, SIGN_UP, ADD_TASKS } from './types';
 
 
 export const reducers = (state = { isAuth: null }, action) => {
@@ -15,8 +15,10 @@ export const reducers = (state = { isAuth: null }, action) => {
     
 
     case SIGN_UP:
-      
       return { ...state, isAuth: action.payload.login}
+
+    case ADD_TASKS:
+      return {...state, tasks: action.payload.tasks};
 
     default:
       return state;

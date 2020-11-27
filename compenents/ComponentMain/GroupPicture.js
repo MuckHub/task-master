@@ -14,11 +14,11 @@ export default function GroupPicture(props) {
 
   return (
     <ScrollView style={styles.picture}>
-      <Text>{props.name}</Text>
+      <Text style={styles.text}>{props.name}</Text>
       <Image
         onPress={() => console.log('onPress()')}
         source={'http://placeimg.com/640/480/nature'}
-        style={{ width: 130, height: 130 }}
+        style={{ width: 150, height: 150 }}
       />
      
     </ScrollView>
