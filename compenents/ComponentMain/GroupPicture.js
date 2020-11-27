@@ -10,18 +10,16 @@ const styles = StyleSheet.create({
 });
 
 export default function GroupPicture(props) {
-  console.log(props);
 
+  
   return (
     <ScrollView style={styles.picture}>
       <Text>{props.name}</Text>
       <Image
-        onPress={() => console.log('onPress()')}
+        onPress={() => console.log(`${props.name} - ON CLICK`)}
         source={'http://placeimg.com/640/480/nature'}
         style={{ width: 130, height: 130 }}
       />
-     
     </ScrollView>
   );
 }
-
