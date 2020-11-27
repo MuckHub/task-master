@@ -10,7 +10,11 @@ const PORT = process.env.PORT || 3100;
 const cors = require('cors');
 const User = require('./src/models/user.model');
 const accountRouter = require('./src/routes/account')
+
+const groupTasksRouter = require('./src/routes/getTasks')
+
 const taskNameRouter = require('./src/routes/taskName')
+
 
 dbConnect();
 app.set('session cookie name', 'sid');
@@ -62,6 +66,8 @@ app.post('/register', async (req, res) => {
     return res.json({error: 'Oops!'});
   }
 });
+
+app.use('/groupTasks', groupTasksRouter)
 
 
 app.listen(PORT, () => {

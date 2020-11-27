@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { CheckBox } from "react-native-elements";
 import { SafeAreaView, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { useSelector, useDispatch } from 'react-redux';
 
-export default function GroupTasks() {
+export default function GroupTasks({ title, navigation }) {
 
-  
+  const getData = useSelector((store) => store);
+  const dispatch = useDispatch();
+
   return (
     <SafeAreaView style={styles.container}>
-        <TouchableOpacity style={[styles.item]}>
-          <Text style={styles.title}>Task Name</Text>
+        <TouchableOpacity onPress={()=>navigation.navigate('Task', {taskName:title})} style={[styles.item]}>
+          <Text style={styles.title}>{title}</Text>
           <CheckBox onIconPress={() => console.log("onIconPress()")} size={30} uncheckedColor="#F00"/>
         </TouchableOpacity>
   </SafeAreaView>
@@ -29,7 +32,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   title: {
-    fontSize: 30,
+    fontSize:13,
     padding: 9,
   },
 });

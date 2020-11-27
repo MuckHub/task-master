@@ -22,11 +22,13 @@ export default function GroupPicture({ name, navigation }) {
 
   return (
     <ScrollView style={styles.picture}>
-      <Text>{name}</Text>
+
+      <Text style={styles.text}>{props.name}</Text>
+
       <Image
         onPress={() => getGroupName()}
         source={'http://placeimg.com/640/480/nature'}
-        style={{ width: 130, height: 130 }}
+        style={{ width: 150, height: 150 }}
       />
      
     </ScrollView>
