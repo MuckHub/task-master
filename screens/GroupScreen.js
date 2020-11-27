@@ -5,6 +5,7 @@ import AllTasks from '../compenents/ComponentsGroupScreen/AllTasks';
 import BottomTabs from '../navigation/BottomTab';
 
 export default function GroupScreen({ navigation }) {
+
   return (
     <View style={styles.container}>
       <Text>Group Screen</Text>
