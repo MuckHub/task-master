@@ -8,6 +8,7 @@ import BottomTabs from '../navigation/BottomTab';
 
 export default function GroupScreen({ navigation }) {
 
+
   let group = 'bootcamp';
   const dispatch = useDispatch();
 
@@ -30,6 +31,7 @@ export default function GroupScreen({ navigation }) {
     getTasks();
   }, []);
  
+
 
   return (
     <View style={styles.container}>

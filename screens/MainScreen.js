@@ -18,7 +18,9 @@ export default function MainScreen({ navigation }) {
   const user = useSelector((store) => store.isAuth);
   const dispatch = useDispatch();
 
+
   let groupsStore = useSelector((store) => store.groups);
+
 
 
   async function getGroups() {
@@ -31,6 +33,8 @@ export default function MainScreen({ navigation }) {
     });
 
     const groups = await response.json();
+
+
 
     dispatch(addGroupsMainAC(groups));
   }
@@ -50,7 +54,7 @@ export default function MainScreen({ navigation }) {
 
           <GroupContainer>
             {groupsStore.map((el) => {
-              return <GroupPicture name={el.groupName} />;
+              return <GroupPicture name={el.groupName} navigation={navigation}/>;
             })}
           </GroupContainer>
         </ScrollView>
