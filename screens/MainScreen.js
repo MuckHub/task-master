@@ -17,9 +17,11 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 export default function MainScreen({ navigation }) {
   const user = useSelector((store) => store.isAuth);
   const dispatch = useDispatch();
-  console.log('user MainScreen >>>>', user);
+
+
   let groupsStore = useSelector((store) => store.groups);
-  console.log('groupsStore >>>>', groupsStore);
+
+
 
   async function getGroups() {
     const response = await fetch('http://192.168.0.108:3100/account', {
@@ -31,14 +33,16 @@ export default function MainScreen({ navigation }) {
     });
 
     const groups = await response.json();
-    console.log('groups  >>>>', groups);
+
+
+
     dispatch(addGroupsMainAC(groups));
   }
 
   useEffect(() => {
     getGroups();
   }, []);
-  console.log('***************');
+
   return (
     <ScrollView style={styles.container}>
       {groupsStore !== undefined && (
@@ -50,7 +54,7 @@ export default function MainScreen({ navigation }) {
 
           <GroupContainer>
             {groupsStore.map((el) => {
-              return <GroupPicture name={el.groupName} />;
+              return <GroupPicture name={el.groupName} navigation={navigation}/>;
             })}
           </GroupContainer>
         </ScrollView>

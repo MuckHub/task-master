@@ -12,6 +12,11 @@ const User = require('./src/models/user.model');
 const Tasks = require('./src/models/task.model');
 const accountRouter = require('./src/routes/account');
 
+const groupTasksRouter = require('./src/routes/getTasks')
+
+const taskNameRouter = require('./src/routes/taskName')
+
+
 dbConnect();
 app.set('session cookie name', 'sid');
 
@@ -38,7 +43,11 @@ app.post('/auth', async (req, res) => {
   }
 });
 
-app.use('/account', accountRouter);
+
+
+app.use('/account', accountRouter)
+app.use('/taskName', taskNameRouter)
+
 
 app.post('/register', async (req, res) => {
   const { login, pass } = req.body;
@@ -59,6 +68,7 @@ app.post('/register', async (req, res) => {
     return res.json({ error: 'Oops!' });
   }
 });
+
 
 app.post('/addImg', async (req, res) => {
   const { taskName, user, imgUrl } = req.body;
@@ -83,6 +93,10 @@ app.post('/addImg', async (req, res) => {
     res.end();
   }
 });
+
+app.use('/groupTasks', groupTasksRouter)
+
+
 
 app.listen(PORT, () => {
   console.log('Server has been started on port: ', PORT);

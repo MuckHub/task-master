@@ -4,8 +4,10 @@ import TaskName from '../compenents/ComponentsTaskScreen/TaskName';
 import TaskImage from '../compenents/ComponentsTaskScreen/TaskImage';
 import TaskDescription from '../compenents/ComponentsTaskScreen/TaskDescription';
 
-export default function TaskScreen({ navigation }) {
-  console.log('RENDERED');
+
+export default function TaskScreen({ route, navigation }) {
+  const {taskName}=route.params;
+
 
   return (
     <View style={styles.container}>
