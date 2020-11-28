@@ -1,19 +1,54 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useEffect } from 'react';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import AllTasks from '../compenents/ComponentsGroupScreen/AllTasks';
+import { useSelector, useDispatch } from 'react-redux';
+import {addAllTasks} from '../redux/actions'
+
 
 export default function AllTasksScreen({ navigation }) {
+
+  let user = useSelector((store) => store.isAuth);
+  const dispatch = useDispatch();
+
+  let groupsStore = useSelector((store) => store.groups);
+
+  let allTasksStore = useSelector((store) => store.allTasks);
+
+  async function getAllTasks() {
+    // const response = await fetch(`http://192.168.88.247:3100/groupTasks`, {
+      const response = await fetch('http://localhost:3100/allTasks', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ groupsStore }),
+      });
+    const allTasks = await response.json();
+    dispatch(addAllTasks(allTasks));
+  }
+
+  useEffect(() => {
+    getAllTasks();
+  }, []);
+
+  
   return (
-    <View style={styles.container}>
-      <Text>All Tasks</Text>
-    </View>
+    <ScrollView style={styles.container}>
+      {allTasksStore !== undefined && (
+        <View>
+          {allTasksStore.map((item) => {
+            return <AllTasks name={item.taskName} image={item.image} navigation={navigation} />;
+          })}
+        </View>
+      )}
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: '#fff'
   },
 });
+

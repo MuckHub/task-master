@@ -9,11 +9,6 @@ import GroupPicture from '../compenents/ComponentMain/GroupPicture';
 import GroupContainer from '../compenents/ComponentMain/GroupContainer';
 import { addGroupsMainAC } from '../redux/actions';
 
-import { NavigationContainer } from '@react-navigation/native';
-import GroupScreen from '../screens/GroupScreen';
-import BottomTab from '../navigation/BottomTab';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
 export default function MainScreen({ navigation }) {
   const user = useSelector((store) => store.isAuth);
   const dispatch = useDispatch();
@@ -21,7 +16,8 @@ export default function MainScreen({ navigation }) {
   let groupsStore = useSelector((store) => store.groups);
 
   async function getGroups() {
-    const response = await fetch('http://192.168.0.108:3100/account', {
+    // const response = await fetch('http://192.168.88.247:3100/account', {
+      const response = await fetch('http://localhost:3100/account', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

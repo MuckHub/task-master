@@ -1,5 +1,3 @@
-const User = require('../models/user.model');
-const Task = require('../models/task.model');
 const Group = require('../models/group.model');
 
 const groupTasks = async (req,res) => {

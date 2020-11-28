@@ -16,7 +16,7 @@ export const AccountName = (props) => {
         imageProps={{}}
         rounded
         size='large'
-        source={{ uri: '' }}
+        source={{ uri: 'https://images.app.goo.gl/5QkEdrhYe6UmgKLT6' }}
         title={matches}
       />
       <Text style={styles.accountName}>{user}</Text>

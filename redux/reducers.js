@@ -1,5 +1,5 @@
 
-import { IS_AUTH, GROUPS_MAIN, SIGN_UP, ADD_TASKS, GET_GROUP_NAME } from './types';
+import { IS_AUTH, GROUPS_MAIN, SIGN_UP, ADD_TASKS, GET_GROUP_NAME, ADD_ALL_TASKS } from './types';
 
 export const reducers = (state = { isAuth: null }, action) => {
   switch (action.type) {
@@ -18,6 +18,9 @@ export const reducers = (state = { isAuth: null }, action) => {
 
     case ADD_TASKS:
       return {...state, tasks: action.payload.tasks};
+
+    case ADD_ALL_TASKS:
+      return {...state, allTasks: action.payload.allTasks};
 
     default:
       return state;

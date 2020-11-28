@@ -36,13 +36,12 @@ export default function AddImageScreen({ navigation: { goBack } }) {
     });
 
     setImage(img.uri);
-    console.log(img.uri);
   };
 
   const addPicture = async () => {
-    console.log(user);
 
-    const response = await fetch('http://192.168.0.108:3100/addImg', {
+    // const response = await fetch('http://192.168.88.247:3100/addImg', {
+      const response = await fetch('http://localhost:3100/addImg', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

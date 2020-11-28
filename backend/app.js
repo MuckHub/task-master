@@ -10,11 +10,12 @@ const PORT = process.env.PORT || 3100;
 const cors = require('cors');
 const User = require('./src/models/user.model');
 const Tasks = require('./src/models/task.model');
+
 const accountRouter = require('./src/routes/account');
-
-const groupTasksRouter = require('./src/routes/getTasks')
-
 const taskNameRouter = require('./src/routes/taskName')
+const groupTasksRouter = require('./src/routes/getTasks');
+const allTasksRouter = require('./src/routes/allTasks');
+
 
 
 dbConnect();
@@ -38,23 +39,17 @@ app.post('/auth', async (req, res) => {
       res.status(400).send('Fill the form');
     }
   } catch (e) {
-    console.log(e);
     res.status(404).send('Something went wrong');
   }
 });
 
-
-
 app.use('/account', accountRouter)
 app.use('/taskName', taskNameRouter)
-
 
 app.post('/register', async (req, res) => {
   const { login, pass } = req.body;
 
   try {
-    console.log('req.body', req.body);
-
     let newUser = User.create({
       login,
       password: pass,
@@ -72,7 +67,6 @@ app.post('/register', async (req, res) => {
 
 app.post('/addImg', async (req, res) => {
   const { taskName, user, imgUrl } = req.body;
-  console.log(req.body);
 
   try {
     await Tasks.updateOne(
@@ -95,6 +89,8 @@ app.post('/addImg', async (req, res) => {
 });
 
 app.use('/groupTasks', groupTasksRouter)
+app.use('/allTasks', allTasksRouter)
+
 
 
 

@@ -26,7 +26,7 @@ export default function GroupPicture({ name, navigation }) {
 
       <Image
         onPress={() => getGroupName()}
-        source={'http://placeimg.com/640/480/nature'}
+        source={'https://images.app.goo.gl/5QkEdrhYe6UmgKLT6'}
         style={{ width: 150, height: 150 }}
       />
     </ScrollView>
