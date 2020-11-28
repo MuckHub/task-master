@@ -21,10 +21,8 @@ export default function GroupScreen({ navigation }) {
     getTasks();
   }, [isFocused]);
 
-
   async function getTasks() {
-    // const response = await fetch(`http://192.168.88.247:3100/groupTasks`, {
-      const response = await fetch(`http://localhost:3100/groupTasks`, {
+    const response = await fetch(`http://192.168.0.108:3100/groupTasks`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

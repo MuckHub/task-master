@@ -1,18 +1,31 @@
 import React from 'react';
-import { CheckBox, Avatar } from "react-native-elements";
-import { SafeAreaView, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { CheckBox, Avatar } from 'react-native-elements';
+import { SafeAreaView, StyleSheet, Text, TouchableOpacity } from 'react-native';
 
-export default function AllTasks({name, image}) {
-
+export default function AllTasks({ name, image, navigation }) {
   return (
     <SafeAreaView style={styles.container}>
-        <TouchableOpacity style={[styles.item]}>
-          <Avatar activeOpacity={0.5} imageProps={image} rounded size="medium" source={{ uri: "https://images.app.goo.gl/5QkEdrhYe6UmgKLT6" }} title="G" />
-          <Text style={styles.title}>{name}</Text>
-          <CheckBox onIconPress={() => console.log("onIconPress()")} size={30} uncheckedColor="#F00"/>
-        </TouchableOpacity>
-  </SafeAreaView>
-);
+      <TouchableOpacity
+        onPress={() => navigation.navigate('Task', { taskName: name })}
+        style={[styles.item]}
+      >
+        <Avatar
+          activeOpacity={0.5}
+          imageProps={image}
+          rounded
+          size='medium'
+          source={{ uri: 'https://images.app.goo.gl/5QkEdrhYe6UmgKLT6' }}
+          title='G'
+        />
+        <Text style={styles.title}>{name}</Text>
+        <CheckBox
+          onIconPress={() => console.log('onIconPress()')}
+          size={30}
+          uncheckedColor='#F00'
+        />
+      </TouchableOpacity>
+    </SafeAreaView>
+  );
 }
 
 const styles = StyleSheet.create({

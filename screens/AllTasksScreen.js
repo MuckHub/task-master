@@ -2,11 +2,9 @@ import React, { useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import AllTasks from '../compenents/ComponentsGroupScreen/AllTasks';
 import { useSelector, useDispatch } from 'react-redux';
-import {addAllTasks} from '../redux/actions'
-
+import { addAllTasks } from '../redux/actions';
 
 export default function AllTasksScreen({ navigation }) {
-
   let user = useSelector((store) => store.isAuth);
   const dispatch = useDispatch();
 
@@ -15,14 +13,13 @@ export default function AllTasksScreen({ navigation }) {
   let allTasksStore = useSelector((store) => store.allTasks);
 
   async function getAllTasks() {
-    // const response = await fetch(`http://192.168.88.247:3100/groupTasks`, {
-      const response = await fetch('http://localhost:3100/allTasks', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ groupsStore }),
-      });
+    const response = await fetch('http://192.168.0.108:3100/allTasks', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ groupsStore }),
+    });
     const allTasks = await response.json();
     dispatch(addAllTasks(allTasks));
   }
@@ -31,13 +28,18 @@ export default function AllTasksScreen({ navigation }) {
     getAllTasks();
   }, []);
 
-  
   return (
     <ScrollView style={styles.container}>
       {allTasksStore !== undefined && (
         <View>
           {allTasksStore.map((item) => {
-            return <AllTasks name={item.taskName} image={item.image} navigation={navigation} />;
+            return (
+              <AllTasks
+                name={item.taskName}
+                image={item.image}
+                navigation={navigation}
+              />
+            );
           })}
         </View>
       )}
@@ -48,7 +50,6 @@ export default function AllTasksScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
   },
 });
-
