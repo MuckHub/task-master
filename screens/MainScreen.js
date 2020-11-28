@@ -2,7 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import { useDispatch } from 'react-redux';
-import { StyleSheet, Text, View, Button, ScrollView } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  ScrollView,
+  ActivityIndicator,
+} from 'react-native';
 import { AccountName } from '../compenents/ComponentMain/AccountName';
 import { Groups } from '../compenents/ComponentMain/Groups';
 import GroupPicture from '../compenents/ComponentMain/GroupPicture';
@@ -33,6 +40,7 @@ export default function MainScreen({ navigation }) {
 
   return (
     <ScrollView style={styles.container}>
+      {groupsStore === undefined && <ActivityIndicator />}
       {groupsStore !== undefined && (
         <ScrollView style={styles.container}>
           <AccountName />

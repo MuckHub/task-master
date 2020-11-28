@@ -1,5 +1,12 @@
 import React, { useEffect } from 'react';
-import { StyleSheet, Text, View, Button, ScrollView } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  ScrollView,
+  ActivityIndicator,
+} from 'react-native';
 import GroupTasks from '../compenents/ComponentsGroupScreen/GroupTasks';
 import AllTasks from '../compenents/ComponentsGroupScreen/AllTasks';
 import { useSelector, useDispatch } from 'react-redux';
@@ -12,8 +19,6 @@ export default function GroupScreen({ navigation }) {
   const dispatch = useDispatch();
 
   let tasksStore = useSelector((store) => store.tasks);
-
-  console.log(tasksStore);
 
   const isFocused = useIsFocused();
 
@@ -30,7 +35,6 @@ export default function GroupScreen({ navigation }) {
       body: JSON.stringify({ group }),
     });
     const tasks = await response.json();
-    console.log(tasks);
 
     dispatch(addTasks(tasks));
   }
@@ -41,6 +45,7 @@ export default function GroupScreen({ navigation }) {
 
   return (
     <ScrollView style={styles.container}>
+      {tasksStore === undefined && <ActivityIndicator />}
       {tasksStore !== undefined && (
         <View>
           <Button
