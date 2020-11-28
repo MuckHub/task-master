@@ -1,10 +1,9 @@
 const Task = require('../models/task.model');
 
-const getTaskName = async (req, res) => {
+const getPosts = async (req, res) => {
 
   try {
-    const task = await Task.find({ name: req.body.name });
-
+    const task = await Task.findOne({ name: req.body.taskName });
     res.send(task.post)
 
   } catch (error) {
@@ -13,5 +12,5 @@ const getTaskName = async (req, res) => {
 };
 
 module.exports = {
-  getTaskName
+  getPosts
 };

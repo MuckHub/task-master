@@ -22,7 +22,7 @@ export default function AuthScreen({ navigation }) {
   const authHandler = async () => {
     console.log(login, pass);
     setError(null);
-    let response = await fetch('http://192.168.0.108:3100/auth', {
+    let response = await fetch('http://192.168.43.13:3100/auth', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
