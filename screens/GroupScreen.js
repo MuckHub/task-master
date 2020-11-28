@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, ScrollView } from 'react-native';
 import GroupTasks from '../compenents/ComponentsGroupScreen/GroupTasks';
 import AllTasks from '../compenents/ComponentsGroupScreen/AllTasks';
 import { useSelector, useDispatch } from 'react-redux';
+import { useIsFocused } from '@react-navigation/native';
 import { addTasks } from '../redux/actions';
 import BottomTabs from '../navigation/BottomTab';
 
@@ -11,7 +12,16 @@ export default function GroupScreen({ navigation }) {
   const dispatch = useDispatch();
 
   let tasksStore = useSelector((store) => store.tasks);
-  
+
+  console.log(tasksStore);
+
+  const isFocused = useIsFocused();
+
+  useEffect(() => {
+    getTasks();
+  }, [isFocused]);
+
+
   async function getTasks() {
     // const response = await fetch(`http://192.168.88.247:3100/groupTasks`, {
       const response = await fetch(`http://localhost:3100/groupTasks`, {
@@ -22,6 +32,7 @@ export default function GroupScreen({ navigation }) {
       body: JSON.stringify({ group }),
     });
     const tasks = await response.json();
+    console.log(tasks);
 
     dispatch(addTasks(tasks));
   }
@@ -31,19 +42,25 @@ export default function GroupScreen({ navigation }) {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       {tasksStore !== undefined && (
         <View>
           <Button
             title='Leaderboard'
             onPress={() => navigation.navigate('Leaderboard')}
           />
-          {tasksStore.map((item) => {
-            return <GroupTasks title={item.taskName} navigation={navigation} />;
+          {tasksStore.tasks.map((item) => {
+            return (
+              <GroupTasks
+                completed={item.completed}
+                title={item.taskName}
+                navigation={navigation}
+              />
+            );
           })}
         </View>
       )}
-    </View>
+    </ScrollView>
   );
 }
 
@@ -51,7 +68,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    // alignItems: 'center',
+    // justifyContent: 'center',
   },
 });

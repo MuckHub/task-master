@@ -24,9 +24,7 @@ export default function MainScreen({ navigation }) {
       },
       body: JSON.stringify({ user }),
     });
-
     const groups = await response.json();
-
     dispatch(addGroupsMainAC(groups));
   }
 
@@ -46,7 +44,9 @@ export default function MainScreen({ navigation }) {
           <GroupContainer>
             {groupsStore.map((el) => {
               return (
-                <GroupPicture name={el.groupName} navigation={navigation} />
+                <View>
+                  <GroupPicture name={el.groupName} navigation={navigation} />
+                </View>
               );
             })}
           </GroupContainer>

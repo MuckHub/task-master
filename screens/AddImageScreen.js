@@ -16,11 +16,12 @@ async function askForPermissions() {
   return true;
 }
 
-export default function AddImageScreen({ navigation: { goBack } }) {
+export default function AddImageScreen({ route, navigation: { goBack } }) {
   const [image, setImage] = useState(null);
-
-  const taskName = 'Virtual Beer Pong';
+  const { taskName } = route.params;
   const user = useSelector((store) => store.isAuth);
+  const groupName = useSelector((store) => store.groupName);
+  console.log('ALL', groupName);
 
   const takePhoto = async () => {
     const hasPermission = await askForPermissions();
@@ -40,13 +41,13 @@ export default function AddImageScreen({ navigation: { goBack } }) {
 
   const addPicture = async () => {
 
-    // const response = await fetch('http://192.168.88.247:3100/addImg', {
-      const response = await fetch('http://localhost:3100/addImg', {
+    const response = await fetch('http://192.168.0.108:3100/addImg', {
+
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ taskName, user, imgUrl: image }),
+      body: JSON.stringify({ taskName, user, imgUrl: image, groupName }),
     });
 
     goBack();
