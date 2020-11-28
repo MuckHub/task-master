@@ -16,10 +16,11 @@ async function askForPermissions() {
   return true;
 }
 
-export default function AddImageScreen({ navigation: { goBack } }) {
+export default function AddImageScreen({ route, navigation: { goBack } }) {
   const [image, setImage] = useState(null);
 
-  const taskName = 'Virtual Beer Pong';
+  const { taskName } = route.params;
+  console.log('taskName>>>', taskName);
   const user = useSelector((store) => store.isAuth);
 
   const takePhoto = async () => {

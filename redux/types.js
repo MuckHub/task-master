@@ -9,4 +9,6 @@ export const ADD_TASKS = 'ADD_TASKS';
 
 export const GET_GROUP_NAME = 'GET_GROUP_NAME';
 
+export const ADD_POSTS = 'ADD_POSTS';
+
 
