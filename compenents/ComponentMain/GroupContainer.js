@@ -3,7 +3,6 @@ import { View, Text } from 'react-native';
 
 export default function GroupPicture({children}){
 
-  console.log(children);
   return (
       <View>
         <Text>{children}</Text>

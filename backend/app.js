@@ -10,10 +10,11 @@ const PORT = process.env.PORT || 3100;
 const cors = require('cors');
 const User = require('./src/models/user.model');
 const Tasks = require('./src/models/task.model');
-const Group = require('./src/models/group.model');
 const accountRouter = require('./src/routes/account');
-
+const taskNameRouter = require('./src/routes/taskName')
 const groupTasksRouter = require('./src/routes/getTasks');
+const allTasksRouter = require('./src/routes/allTasks');
+const Group = require('./src/models/group.model');
 
 const taskNameRouter = require('./src/routes/taskName');
 
@@ -38,13 +39,13 @@ app.post('/auth', async (req, res) => {
       res.status(400).send('Fill the form');
     }
   } catch (e) {
-    console.log(e);
     res.status(404).send('Something went wrong');
   }
 });
 
-app.use('/account', accountRouter);
-app.use('/taskName', taskNameRouter);
+
+app.use('/account', accountRouter)
+app.use('/taskName', taskNameRouter)
 
 app.post('/register', async (req, res) => {
   const { login, pass } = req.body;
@@ -65,6 +66,7 @@ app.post('/register', async (req, res) => {
 });
 
 app.post('/addImg', async (req, res) => {
+
   const { taskName, user, imgUrl, groupName } = req.body;
 
   const task = await Tasks.findOne({ name: taskName });
@@ -79,6 +81,7 @@ app.post('/addImg', async (req, res) => {
               image: imgUrl,
               likesCount: 0,
             },
+
           },
         }
       );
@@ -124,7 +127,13 @@ app.post('/addImg', async (req, res) => {
   }
 });
 
-app.use('/groupTasks', groupTasksRouter);
+
+app.use('/groupTasks', groupTasksRouter)
+app.use('/allTasks', allTasksRouter)
+
+
+
+
 
 app.listen(PORT, () => {
   console.log('Server has been started on port: ', PORT);

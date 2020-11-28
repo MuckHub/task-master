@@ -49,10 +49,5 @@ const styles = StyleSheet.create({
   },
 });
 
-// import { Button, CheckBox } from "react-native-elements";
-// import { TouchableHighlight, StyleSheet, View, Text } from "react-native";
-{
-  /* <Button buttonStyle={{ width: 350 }} containerStyle={{ margin: 5 }} disabled disabledStyle={{ borderWidth: 2, borderColor: "#00F"}} disabledTitleStyle={{ color: "#00F" }} title="Task 1" titleProps={{}} titleStyle={{ marginHorizontal: 5 }} type="clear" /><CheckBox onIconPress={() => console.log("onIconPress()")} size={30} uncheckedColor="#F00"/>
-<Button buttonStyle={{ width: 350 }} containerStyle={{ margin: 5 }} disabled disabledStyle={{ borderWidth: 2, borderColor: "#00F"}} disabledTitleStyle={{ color: "#00F" }} title="Task 1" titleProps={{}} titleStyle={{ marginHorizontal: 5 }} type="clear" />
-<Button buttonStyle={{ width: 350 }} containerStyle={{ margin: 5 }} disabled disabledStyle={{ borderWidth: 2, borderColor: "#00F"}} disabledTitleStyle={{ color: "#00F" }} title="Task 1" titleProps={{}} titleStyle={{ marginHorizontal: 5 }} type="clear" /> */
-}
+
+

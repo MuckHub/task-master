@@ -6,8 +6,10 @@ import {
   GET_GROUP_NAME,
   ADD_POSTS,
   ADD_EMPTY_POSTS,
+  ADD_ALL_TASKS,
 } from './types';
 
+export const addAllTasks = (allTasks) => ({ type: ADD_ALL_TASKS, payload: {allTasks} });
 export const isAuthAC = (login) => ({ type: IS_AUTH, payload: { login } });
 export const signUp = (login, pass) => ({
   type: SIGN_UP,
@@ -24,3 +26,4 @@ export const getGroupNameAC = (groupName) => ({
 });
 export const addPostsAC = (posts) => ({ type: ADD_POSTS, payload: { posts } });
 export const addEmptyPostAC = () => ({ type: ADD_EMPTY_POSTS });
+

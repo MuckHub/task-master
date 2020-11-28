@@ -2,13 +2,13 @@ import React from 'react';
 import { CheckBox, Avatar } from "react-native-elements";
 import { SafeAreaView, StyleSheet, Text, TouchableOpacity } from "react-native";
 
-export default function AllTasks() {
+export default function AllTasks({name, image}) {
 
   return (
     <SafeAreaView style={styles.container}>
         <TouchableOpacity style={[styles.item]}>
-          <Avatar activeOpacity={0.5} imageProps={{}} rounded size="medium" source={{ uri: "" }} title="G" />
-          <Text style={styles.title}>Task Name</Text>
+          <Avatar activeOpacity={0.5} imageProps={image} rounded size="medium" source={{ uri: "https://images.app.goo.gl/5QkEdrhYe6UmgKLT6" }} title="G" />
+          <Text style={styles.title}>{name}</Text>
           <CheckBox onIconPress={() => console.log("onIconPress()")} size={30} uncheckedColor="#F00"/>
         </TouchableOpacity>
   </SafeAreaView>
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    fontSize: 30,
+    fontSize: 10,
     padding: 10,
   },
 });

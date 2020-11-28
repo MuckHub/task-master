@@ -17,8 +17,10 @@ export default function SignUpScreen({ navigation }) {
   const [login, setLogin] = useState('');
   const [pass, setPass] = useState('');
 
+
   async function signupHandler() {
     const request = await fetch('http://192.168.0.108:3100/register', {
+
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
