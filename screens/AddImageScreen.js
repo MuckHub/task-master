@@ -18,10 +18,10 @@ async function askForPermissions() {
 
 export default function AddImageScreen({ route, navigation: { goBack } }) {
   const [image, setImage] = useState(null);
-
   const { taskName } = route.params;
-  console.log('taskName>>>', taskName);
   const user = useSelector((store) => store.isAuth);
+  const groupName = useSelector((store) => store.groupName);
+  console.log('ALL', groupName);
 
   const takePhoto = async () => {
     const hasPermission = await askForPermissions();
@@ -37,18 +37,15 @@ export default function AddImageScreen({ route, navigation: { goBack } }) {
     });
 
     setImage(img.uri);
-    console.log(img.uri);
   };
 
   const addPicture = async () => {
-    console.log(user);
-
     const response = await fetch('http://192.168.0.108:3100/addImg', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ taskName, user, imgUrl: image }),
+      body: JSON.stringify({ taskName, user, imgUrl: image, groupName }),
     });
 
     goBack();

@@ -10,12 +10,12 @@ const PORT = process.env.PORT || 3100;
 const cors = require('cors');
 const User = require('./src/models/user.model');
 const Tasks = require('./src/models/task.model');
+const Group = require('./src/models/group.model');
 const accountRouter = require('./src/routes/account');
 
-const groupTasksRouter = require('./src/routes/getTasks')
+const groupTasksRouter = require('./src/routes/getTasks');
 
-const taskNameRouter = require('./src/routes/taskName')
-
+const taskNameRouter = require('./src/routes/taskName');
 
 dbConnect();
 app.set('session cookie name', 'sid');
@@ -43,18 +43,13 @@ app.post('/auth', async (req, res) => {
   }
 });
 
-
-
-app.use('/account', accountRouter)
-app.use('/taskName', taskNameRouter)
-
+app.use('/account', accountRouter);
+app.use('/taskName', taskNameRouter);
 
 app.post('/register', async (req, res) => {
   const { login, pass } = req.body;
 
   try {
-    console.log('req.body', req.body);
-
     let newUser = User.create({
       login,
       password: pass,
@@ -69,34 +64,67 @@ app.post('/register', async (req, res) => {
   }
 });
 
-
 app.post('/addImg', async (req, res) => {
-  const { taskName, user, imgUrl } = req.body;
-  console.log(req.body);
+  const { taskName, user, imgUrl, groupName } = req.body;
 
-  try {
-    await Tasks.updateOne(
-      { name: taskName },
-      {
-        $push: {
-          post: {
-            login: user,
-            image: imgUrl,
-            likesCount: 0,
+  const task = await Tasks.findOne({ name: taskName });
+  if (task) {
+    try {
+      await Tasks.updateOne(
+        { name: taskName },
+        {
+          $push: {
+            post: {
+              login: user,
+              image: imgUrl,
+              likesCount: 0,
+            },
           },
-        },
-      }
-    );
+        }
+      );
 
-    res.end();
-  } catch (error) {
+      const group = await Group.findOne({ name: groupName });
+      const updatedTasks = group.tasks;
+      updatedTasks.map((el) => {
+        if (el.taskName === taskName) {
+          return el.completed.push(user);
+        }
+        return el;
+      });
+
+      await Group.updateOne({ name: groupName }, { tasks: updatedTasks });
+
+      res.end();
+    } catch (error) {
+      res.end();
+    }
+  } else {
+    await new Tasks({
+      name: taskName,
+      post: [
+        {
+          login: user,
+          image: imgUrl,
+          likesCount: 0,
+        },
+      ],
+    }).save();
+
+    const group = await Group.findOne({ name: groupName });
+    const updatedTasks = group.tasks;
+    updatedTasks.map((el) => {
+      if (el.taskName === taskName) {
+        return el.completed.push(user);
+      }
+      return el;
+    });
+    await Group.updateOne({ name: groupName }, { tasks: updatedTasks });
+    
     res.end();
   }
 });
 
-app.use('/groupTasks', groupTasksRouter)
-
-
+app.use('/groupTasks', groupTasksRouter);
 
 app.listen(PORT, () => {
   console.log('Server has been started on port: ', PORT);
