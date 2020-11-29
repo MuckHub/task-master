@@ -14,6 +14,7 @@ const accountRouter = require('./src/routes/account');
 const taskNameRouter = require('./src/routes/taskName');
 const groupTasksRouter = require('./src/routes/getTasks');
 const allTasksRouter = require('./src/routes/allTasks');
+const leaderboardRouter = require('./src/routes/leaderboard');
 const Group = require('./src/models/group.model');
 
 dbConnect();
@@ -124,6 +125,7 @@ app.post('/addImg', async (req, res) => {
 
 app.use('/groupTasks', groupTasksRouter);
 app.use('/allTasks', allTasksRouter);
+app.use('/leaderboard', leaderboardRouter);
 
 app.listen(PORT, () => {
   console.log('Server has been started on port: ', PORT);

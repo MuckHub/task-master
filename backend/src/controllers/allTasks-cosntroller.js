@@ -29,4 +29,3 @@ const allTasks = async (req,res) => {
 module.exports = {
   allTasks
 };
-

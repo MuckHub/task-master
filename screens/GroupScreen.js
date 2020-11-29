@@ -1,19 +1,15 @@
 import React, { useEffect } from 'react';
 import { StyleSheet, Text, View, Button, ScrollView } from 'react-native';
 import GroupTasks from '../compenents/ComponentsGroupScreen/GroupTasks';
-import AllTasks from '../compenents/ComponentsGroupScreen/AllTasks';
 import { useSelector, useDispatch } from 'react-redux';
 import { useIsFocused } from '@react-navigation/native';
 import { addTasks } from '../redux/actions';
-import BottomTabs from '../navigation/BottomTab';
 
 export default function GroupScreen({ navigation }) {
   let group = useSelector((store) => store.groupName);
   const dispatch = useDispatch();
 
   let tasksStore = useSelector((store) => store.tasks);
-
-  console.log(tasksStore);
 
   const isFocused = useIsFocused();
 
@@ -22,7 +18,7 @@ export default function GroupScreen({ navigation }) {
   }, [isFocused]);
 
   async function getTasks() {
-    const response = await fetch(`http://192.168.0.108:3100/groupTasks`, {
+    const response = await fetch(`http://localhost:3100/groupTasks`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -30,7 +26,6 @@ export default function GroupScreen({ navigation }) {
       body: JSON.stringify({ group }),
     });
     const tasks = await response.json();
-    console.log(tasks);
 
     dispatch(addTasks(tasks));
   }

@@ -7,6 +7,7 @@ import {
   ADD_POSTS,
   ADD_EMPTY_POSTS,
   ADD_ALL_TASKS,
+  ADD_BOARD,
 } from './types';
 
 export const addAllTasks = (allTasks) => ({ type: ADD_ALL_TASKS, payload: {allTasks} });
@@ -26,4 +27,5 @@ export const getGroupNameAC = (groupName) => ({
 });
 export const addPostsAC = (posts) => ({ type: ADD_POSTS, payload: { posts } });
 export const addEmptyPostAC = () => ({ type: ADD_EMPTY_POSTS });
+export const addBoard = (chart) => ({ type: ADD_BOARD, payload: {chart} });
 
