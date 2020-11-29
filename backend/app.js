@@ -12,6 +12,8 @@ const User = require('./src/models/user.model');
 const Tasks = require('./src/models/task.model');
 const accountRouter = require('./src/routes/account');
 
+const newTaskRouter = require('./src/routes/newTask');
+
 const groupTasksRouter = require('./src/routes/getTasks')
 
 const taskNameRouter = require('./src/routes/taskName')
@@ -47,6 +49,7 @@ app.post('/auth', async (req, res) => {
 
 app.use('/account', accountRouter)
 app.use('/taskName', taskNameRouter)
+app.use('/newTask', newTaskRouter)
 
 
 app.post('/register', async (req, res) => {
