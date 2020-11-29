@@ -5,15 +5,11 @@ import { Image, Text } from 'react-native-elements';
 import { useDispatch } from 'react-redux';
 import { getGroupNameAC } from '../../redux/actions';
 
-const styles = StyleSheet.create({
-  picture: {
-    padding: 25,
-  },
-});
-
 export default function GroupPicture({ name, navigation }) {
   const dataFromRedux = useSelector((store) => store);
   const dispatch = useDispatch();
+  const image =
+    'https://lh3.googleusercontent.com/PTdoVmYDpLjInuXpv9z5QZWYVfw0V9XUAmqvPnjVhAFxHteAamLeS5MXs5SMH6ir5GOqEQ=s85';
 
   function getGroupName() {
     dispatch(getGroupNameAC(name));
@@ -26,9 +22,18 @@ export default function GroupPicture({ name, navigation }) {
 
       <Image
         onPress={() => getGroupName()}
-        source={'https://images.app.goo.gl/5QkEdrhYe6UmgKLT6'}
-        style={{ width: 150, height: 150 }}
+        source={image}
+        style={{ width: 130, height: 130, borderRadius: 10 }}
       />
     </ScrollView>
   );
 }
+
+const styles = StyleSheet.create({
+  picture: {
+    padding: 25,
+  },
+  text: {
+    marginBottom: 10,
+  },
+});

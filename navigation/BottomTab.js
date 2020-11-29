@@ -9,14 +9,14 @@ const Tab = createBottomTabNavigator();
 
 export default function MyTabs() {
   return (
-    <Tab.Navigator initialRouteName='Main'>
+    <Tab.Navigator>
       <Tab.Screen
         name='Home'
         component={AnotherStackNavigator}
         options={{
           tabBarLabel: 'Home',
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name='home' color={color} size={size} />
+            <MaterialCommunityIcons name='home' color={'#fb5b5a'} size={30} />
           ),
         }}
       />
@@ -26,7 +26,7 @@ export default function MyTabs() {
         options={{
           tabBarLabel: 'All Tasks',
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name='check' color={color} size={size} />
+            <MaterialCommunityIcons name='check' color={'#fb5b5a'} size={30} />
           ),
         }}
       />
@@ -36,9 +36,14 @@ export default function MyTabs() {
         options={{
           tabBarLabel: 'Profile',
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name='account' color={color} size={size} />
+            <MaterialCommunityIcons
+              name='account'
+              color={'#fb5b5a'}
+              size={30}
+            />
           ),
         }}
+        
       />
     </Tab.Navigator>
   );
