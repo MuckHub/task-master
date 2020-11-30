@@ -1,18 +1,26 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { useDispatch } from 'react-redux';
-import { StyleSheet, Text, View, Button, ScrollView } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  ScrollView,
+  ActivityIndicator,
+  SafeAreaView,
+  ImageBackground,
+} from 'react-native';
 import { AccountName } from '../compenents/ComponentMain/AccountName';
 import { Groups } from '../compenents/ComponentMain/Groups';
 import GroupPicture from '../compenents/ComponentMain/GroupPicture';
 import GroupContainer from '../compenents/ComponentMain/GroupContainer';
 import { addGroupsMainAC } from '../redux/actions';
 
-import { NavigationContainer } from '@react-navigation/native';
-import GroupScreen from '../screens/GroupScreen';
-import BottomTab from '../navigation/BottomTab';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+const image = {
+  uri:
+    'https://products.ls.graphics/mesh-gradients/images/44.-Green-Yellow_1.jpg',
+};
 
 export default function MainScreen({ navigation }) {
   const user = useSelector((store) => store.isAuth);
@@ -28,9 +36,7 @@ export default function MainScreen({ navigation }) {
       },
       body: JSON.stringify({ user }),
     });
-
     const groups = await response.json();
-
     dispatch(addGroupsMainAC(groups));
   }
 
@@ -39,30 +45,68 @@ export default function MainScreen({ navigation }) {
   }, []);
 
   return (
-    <ScrollView style={styles.container}>
-      {groupsStore !== undefined && (
-        <ScrollView style={styles.container}>
-          <AccountName />
-          <Button title='LOGOUT' onPress={() => navigation.navigate('Auth')} />
+    <ImageBackground source={image} style={styles.image}>
+      <ScrollView style={styles.container}>
+        {groupsStore === undefined && <ActivityIndicator />}
+        {groupsStore !== undefined && (
+          <ScrollView style={styles.container}>
+            <SafeAreaView>
+              <View style={styles.account}>
+                <AccountName />
+              </View>
 
-          <Groups />
+              <Button
+                title='LOGOUT'
+                onPress={() => navigation.navigate('Auth')}
+              />
 
-          <GroupContainer>
-            {groupsStore.map((el) => {
-              return (
-                <GroupPicture name={el.groupName} navigation={navigation} />
-              );
-            })}
-          </GroupContainer>
-        </ScrollView>
-      )}
-    </ScrollView>
+              <View style={styles.groups}>
+                <Groups />
+                <GroupContainer>
+                  {groupsStore.map((el) => {
+                    return (
+                      <View>
+                        <GroupPicture
+                          name={el.groupName}
+                          navigation={navigation}
+                        />
+                      </View>
+                    );
+                  })}
+                </GroupContainer>
+              </View>
+            </SafeAreaView>
+          </ScrollView>
+        )}
+      </ScrollView>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  account: {
+    flex: 1,
+    borderRadius: 10,
+    margin: 20,
+    height: 150,
+    borderWidth: 0,
     backgroundColor: '#fff',
+  },
+  groups: {
+    flex: 1,
+    borderRadius: 10,
+    margin: 20,
+    height: 350,
+    borderWidth: 0,
+    backgroundColor: '#fff',
+  },
+  image: {
+    flex: 1,
+    width: '100%',
+    height: '100%',
+    alignItems: 'center',
   },
 });

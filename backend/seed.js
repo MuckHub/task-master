@@ -28,7 +28,7 @@ async function seedBase() {
     tasks: [
       { taskId: '0', taskName: 'Сделай мостик! Нужен фото пруф!' },
       { taskId: '1', taskName: 'Virtual Beer Pong' },
-      { taskId: '3', taskName: 'Recreate a Famous Movie Scene' },
+      { taskId: '2', taskName: 'Recreate a Famous Movie Scene' },
     ],
   });
   let group2 = await new Group({

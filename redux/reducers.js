@@ -1,3 +1,4 @@
+
 import {
   IS_AUTH,
   GROUPS_MAIN,
@@ -6,7 +7,10 @@ import {
   GET_GROUP_NAME,
   ADD_POSTS,
   ADD_EMPTY_POSTS,
+  ADD_ALL_TASKS,
+  ADD_BOARD,
 } from './types';
+
 
 export const reducers = (state = { isAuth: null }, action) => {
   switch (action.type) {
@@ -30,6 +34,13 @@ export const reducers = (state = { isAuth: null }, action) => {
 
     case ADD_EMPTY_POSTS:
       return { ...state, posts: '' };
+
+    case ADD_ALL_TASKS:
+      return {...state, allTasks: action.payload.allTasks};
+    
+    case ADD_BOARD:
+      console.log('>>>>>', action.payload)
+      return {...state, chart: action.payload.chart};
 
     default:
       return state;

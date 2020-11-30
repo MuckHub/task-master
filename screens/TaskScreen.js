@@ -4,11 +4,18 @@ import TaskName from '../compenents/ComponentsTaskScreen/TaskName';
 import TaskImage from '../compenents/ComponentsTaskScreen/TaskImage';
 import TaskDescription from '../compenents/ComponentsTaskScreen/TaskDescription';
 import { addPostsAC, addEmptyPostAC } from '../redux/actions';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { useIsFocused } from '@react-navigation/native';
 import { Image } from 'react-native-elements';
 
 export default function TaskScreen({ route, navigation }) {
+  const isFocused = useIsFocused();
+
+  useEffect(() => {
+    getPosts();
+  }, [isFocused]);
+
   const { taskName } = route.params;
   const dispatch = useDispatch();
   const postsRedux = useSelector((store) => store.posts);

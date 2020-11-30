@@ -1,13 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Button, TouchableOpacity, ScrollView } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  ScrollView,
+  TouchableOpacity,
+  ActivityIndicator,
+} from 'react-native';
+
 import GroupTasks from '../compenents/ComponentsGroupScreen/GroupTasks';
-import AllTasks from '../compenents/ComponentsGroupScreen/AllTasks';
 import { useSelector, useDispatch } from 'react-redux';
+import { useIsFocused } from '@react-navigation/native';
 import { addTasks } from '../redux/actions';
 import BottomTabs from '../navigation/BottomTab';
 import { Input } from "react-native-elements";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { TextInput } from 'react-native';
+
 
 export default function GroupScreen({ navigation }) {
   const [value, onChangeText] = React.useState('');
@@ -17,6 +27,13 @@ export default function GroupScreen({ navigation }) {
   const dispatch = useDispatch();
 
   let tasksStore = useSelector((store) => store.tasks);
+
+  const isFocused = useIsFocused();
+
+  useEffect(() => {
+    getTasks();
+  }, [isFocused]);
+
   async function getTasks() {
     const response = await fetch(`http://192.168.43.13:3100/groupTasks`, {
       method: 'POST',
@@ -51,13 +68,15 @@ export default function GroupScreen({ navigation }) {
   }, []);
 
   return (
-    <ScrollView>
+    <ScrollView style={styles.container}>
+      {tasksStore === undefined && <ActivityIndicator />}
       {tasksStore !== undefined && (
         <View >
           <Button
             title='Leaderboard'
             onPress={() => navigation.navigate('Leaderboard')}
           />
+
           <Text style={styles.accountName}>Tasks</Text>
           <TouchableOpacity onPress={() => SetTougle(true)} style={styles.roundButton1} ><Text>+</Text></TouchableOpacity>
           {tougle !== false &&
@@ -74,8 +93,16 @@ export default function GroupScreen({ navigation }) {
             />
             </View>
           }
-          {tasksStore.map((item) => {
-            return <GroupTasks title={item.taskName} navigation={navigation} />;
+
+          {tasksStore.tasks.map((item) => {
+            return (
+              <GroupTasks
+                completed={item.completed}
+                title={item.taskName}
+                navigation={navigation}
+              />
+            );
+
           })}
         </View>
       )}
@@ -87,8 +114,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    // alignItems: 'center',
+    // justifyContent: 'center',
   },
     text: {
     flexDirection: 'row',

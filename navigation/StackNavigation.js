@@ -11,14 +11,22 @@ const Stack = createStackNavigator();
 export default function MainStackNavigator() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name='Auth' component={AuthScreen} />
+      <Stack.Screen
+        name='Auth'
+        component={AuthScreen}
+        options={{ headerShown: false }}
+      />
       <Stack.Screen
         name='Main'
         component={BottomTabs}
         options={{ headerShown: false, gestureEnabled: false }}
       />
 
-      <Stack.Screen name='SignUp' component={SignUpScreen} />
+      <Stack.Screen
+        name='SignUp'
+        component={SignUpScreen}
+        options={{ headerShown: false }}
+      />
     </Stack.Navigator>
   );
 }

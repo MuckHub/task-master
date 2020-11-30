@@ -1,18 +1,39 @@
 import React from 'react';
-import { CheckBox, Avatar } from "react-native-elements";
-import { SafeAreaView, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { CheckBox, Avatar } from 'react-native-elements';
+import { SafeAreaView, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
 
-export default function AllTasks() {
+export default function AllTasks({ name, image, completed, navigation }) {
+  const user = useSelector((store) => store.isAuth);
+  let isChecked = false;
+  if (completed && completed.includes(user)) {
+    isChecked = true;
+  }
 
   return (
     <SafeAreaView style={styles.container}>
-        <TouchableOpacity style={[styles.item]}>
-          <Avatar activeOpacity={0.5} imageProps={{}} rounded size="medium" source={{ uri: "" }} title="G" />
-          <Text style={styles.title}>Task Name</Text>
-          <CheckBox onIconPress={() => console.log("onIconPress()")} size={30} uncheckedColor="#F00"/>
-        </TouchableOpacity>
-  </SafeAreaView>
-);
+      <TouchableOpacity
+        onPress={() => navigation.navigate('Task', { taskName: name })}
+        style={[styles.item]}
+      >
+        <Avatar
+          activeOpacity={0.5}
+          imageProps={image}
+          rounded
+          size='medium'
+          source={{ uri: 'https://images.app.goo.gl/5QkEdrhYe6UmgKLT6' }}
+          title='G'
+        />
+        <Text style={styles.title}>{name}</Text>
+        <CheckBox
+          checked={isChecked}
+          onIconPress={() => console.log('onIconPress()')}
+          size={30}
+          uncheckedColor='#F00'
+        />
+      </TouchableOpacity>
+    </SafeAreaView>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -32,7 +53,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    fontSize: 30,
+    fontSize: 10,
     padding: 10,
   },
 });

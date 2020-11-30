@@ -13,7 +13,9 @@ export default function TaskImage(props) {
       <Image
         onPress={() => console.log('onPress()')}
         source={{
+
           uri: img,
+
         }}
         style={{ width: 300, height: 300 }}
       />

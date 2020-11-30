@@ -12,11 +12,13 @@ const User = require('./src/models/user.model');
 const Tasks = require('./src/models/task.model');
 const accountRouter = require('./src/routes/account');
 
+
 const newTaskRouter = require('./src/routes/newTask');
-
-const groupTasksRouter = require('./src/routes/getTasks')
-
-const taskNameRouter = require('./src/routes/taskName')
+const taskNameRouter = require('./src/routes/taskName');
+const groupTasksRouter = require('./src/routes/getTasks');
+const allTasksRouter = require('./src/routes/allTasks');
+const leaderboardRouter = require('./src/routes/leaderboard');
+const Group = require('./src/models/group.model');
 
 
 dbConnect();
@@ -40,10 +42,10 @@ app.post('/auth', async (req, res) => {
       res.status(400).send('Fill the form');
     }
   } catch (e) {
-    console.log(e);
     res.status(404).send('Something went wrong');
   }
 });
+
 
 
 
@@ -52,12 +54,11 @@ app.use('/taskName', taskNameRouter)
 app.use('/newTask', newTaskRouter)
 
 
+
 app.post('/register', async (req, res) => {
   const { login, pass } = req.body;
 
   try {
-    console.log('req.body', req.body);
-
     let newUser = User.create({
       login,
       password: pass,
@@ -72,34 +73,69 @@ app.post('/register', async (req, res) => {
   }
 });
 
-
 app.post('/addImg', async (req, res) => {
-  const { taskName, user, imgUrl } = req.body;
-  console.log(req.body);
+  const { taskName, user, imgUrl, groupName } = req.body;
 
-  try {
-    await Tasks.updateOne(
-      { name: taskName },
-      {
-        $push: {
-          post: {
-            login: user,
-            image: imgUrl,
-            likesCount: 0,
+  const task = await Tasks.findOne({ name: taskName });
+  if (task) {
+    try {
+      await Tasks.updateOne(
+        { name: taskName },
+        {
+          $push: {
+            post: {
+              login: user,
+              image: imgUrl,
+              likesCount: 0,
+            },
           },
-        },
-      }
-    );
+        }
+      );
 
-    res.end();
-  } catch (error) {
+      const group = await Group.findOne({ name: groupName });
+      const updatedTasks = group.tasks;
+      updatedTasks.map((el) => {
+        if (el.taskName === taskName) {
+          return el.completed.push(user);
+        }
+        return el;
+      });
+
+      await Group.updateOne({ name: groupName }, { tasks: updatedTasks });
+
+      res.end();
+    } catch (error) {
+      res.end();
+    }
+  } else {
+    await new Tasks({
+      name: taskName,
+      post: [
+        {
+          login: user,
+          image: imgUrl,
+          likesCount: 0,
+        },
+      ],
+    }).save();
+
+    const group = await Group.findOne({ name: groupName });
+    const updatedTasks = group.tasks;
+    updatedTasks.map((el) => {
+      if (el.taskName === taskName) {
+        return el.completed.push(user);
+      }
+      return el;
+    });
+    await Group.updateOne({ name: groupName }, { tasks: updatedTasks });
+
     res.end();
   }
 });
 
-app.use('/groupTasks', groupTasksRouter)
-
-
+app.use('/groupTasks', groupTasksRouter);
+app.use('/allTasks', allTasksRouter);
+app.use('/leaderboard', leaderboardRouter);
 
 app.listen(PORT, () => {
   console.log('Server has been started on port: ', PORT);

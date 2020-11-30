@@ -7,10 +7,16 @@ import {
   TextInput,
   Keyboard,
   TouchableWithoutFeedback,
+  TouchableOpacity,
+  ImageBackground,
 } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { isAuthAC } from '../redux/actions';
 import { addGroupsMainAC } from '../redux/actions';
+
+const image = {
+  uri: 'https://products.ls.graphics/mesh-gradients/images/22.-Shalimar_1.jpg',
+};
 
 export default function AuthScreen({ navigation }) {
   const [error, setError] = useState(null);
@@ -20,9 +26,10 @@ export default function AuthScreen({ navigation }) {
   const dispatch = useDispatch();
 
   const authHandler = async () => {
-    console.log(login, pass);
     setError(null);
-    let response = await fetch('http://192.168.43.13:3100/auth', {
+
+
+    let response = await fetch('http://192.168.0.108:3100/auth', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -45,30 +52,48 @@ export default function AuthScreen({ navigation }) {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <View style={styles.container}>
-        <Text>Sign In:</Text>
-        {error && <Text style={styles.error}>{error}</Text>}
-        <TextInput
-          autoCorrect={false}
-          secureTextEntry={false}
-          style={{ height: 40, width: 120 }}
-          placeholder='Login'
-          value={login}
-          onChangeText={(login) => setLogin(login)}
-        />
-        <TextInput
-          autoCorrect={false}
-          secureTextEntry={true}
-          style={{ height: 60, width: 120 }}
-          placeholder='Password'
-          value={pass}
-          onChangeText={(pass) => setPass(pass)}
-        />
-        <Button title='Login' onPress={authHandler} />
+        <ImageBackground source={image} style={styles.image}>
+          <Text style={styles.logo}>Task Master</Text>
+          {error && <Text style={styles.error}>{error}</Text>}
+          <View style={styles.inputView}>
+            <TextInput
+              autoCorrect={false}
+              secureTextEntry={false}
+              style={{ height: 40, width: 120 }}
+              placeholder='Login...'
+              value={login}
+              onChangeText={(login) => setLogin(login)}
+            />
+          </View>
+          <View style={styles.inputView}>
+            <TextInput
+              autoCorrect={false}
+              secureTextEntry={true}
+              style={{ height: 60, width: 120 }}
+              placeholder='Password...'
+              value={pass}
+              onChangeText={(pass) => setPass(pass)}
+            />
+          </View>
+          <TouchableOpacity>
+            <Text style={styles.forgot}>Forgot Password?</Text>
+          </TouchableOpacity>
 
-        <Button
-          title='Register'
-          onPress={() => navigation.navigate('SignUp')}
-        />
+          <TouchableOpacity style={styles.loginBtn}>
+            <Text style={styles.loginText} onPress={authHandler}>
+              LOGIN
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity>
+            <Text
+              style={styles.signText}
+              onPress={() => navigation.navigate('SignUp')}
+            >
+              Sign up
+            </Text>
+          </TouchableOpacity>
+        </ImageBackground>
       </View>
     </TouchableWithoutFeedback>
   );
@@ -83,5 +108,46 @@ const styles = StyleSheet.create({
   },
   error: {
     color: 'red',
+    marginBottom: 10,
+  },
+  logo: {
+    fontWeight: 'bold',
+    fontSize: 50,
+    color: '#fb5b5a',
+    marginBottom: 40,
+  },
+  inputView: {
+    width: '80%',
+    backgroundColor: 'white',
+    borderRadius: 25,
+    height: 50,
+    marginBottom: 20,
+    justifyContent: 'center',
+    padding: 20,
+  },
+  forgot: {
+    fontSize: 11,
+  },
+  loginBtn: {
+    width: '80%',
+    backgroundColor: '#fb5b5a',
+    borderRadius: 25,
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 40,
+    marginBottom: 20,
+  },
+  loginText: {
+    color: 'white',
+  },
+  signText: {
+    color: 'black',
+  },
+  image: {
+    width: '100%',
+    height: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
