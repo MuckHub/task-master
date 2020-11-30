@@ -18,22 +18,32 @@ export default function GroupPicture({ name, navigation }) {
 
   return (
     <ScrollView style={styles.picture}>
-      <Text style={styles.text}>{name}</Text>
-
       <Image
         onPress={() => getGroupName()}
         source={image}
-        style={{ width: 130, height: 130, borderRadius: 10 }}
+        style={{
+          width: 130,
+          height: 130,
+          borderRadius: 10,
+          alignSelf: 'center',
+        }}
       />
+      <Text style={styles.text}>{name}</Text>
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   picture: {
-    padding: 25,
+    marginTop: 20,
   },
   text: {
-    marginBottom: 10,
+    justifyContent: 'center',
+    alignSelf: 'center',
+    alignItems: 'center',
+    marginTop: 5,
+    zIndex: 1,
+    color: '#fb5b5a',
+    fontWeight: 'bold',
   },
 });

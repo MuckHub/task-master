@@ -6,13 +6,8 @@ export const Groups = ({ navigation }) => {
   return (
     <View style={styles.text}>
       <Text style={styles.accountName}>Groups</Text>
-      <TouchableOpacity
-        title='Group'
-        onPress={() => navigation.navigate('Group')}
-        style={styles.roundButton1}
-        onPress={() => navigation.navigate('Group')}
-      >
-        <Text>+</Text>
+      <TouchableOpacity style={styles.add}>
+        <Text style={styles.textAdd}>Add new</Text>
       </TouchableOpacity>
     </View>
   );
@@ -43,4 +38,18 @@ const styles = StyleSheet.create({
     backgroundColor: 'lightblue',
   },
   picture: {},
+  add: {
+    width: '28%',
+    backgroundColor: '#fb5b5a',
+    borderRadius: 25,
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 15,
+    marginBottom: 20,
+  },
+  textAdd: {
+    color: 'white',
+    fontWeight: 'bold',
+  },
 });

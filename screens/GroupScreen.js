@@ -78,7 +78,7 @@ export default function GroupScreen({ navigation }) {
 
           <Text style={styles.accountName}>Tasks</Text>
           <TouchableOpacity
-            onPress={() => SetTougle(true)}
+            onPress={() => (tougle ? SetTougle(false) : SetTougle(true))}
             style={styles.roundButton1}
           >
             <Text>+</Text>
