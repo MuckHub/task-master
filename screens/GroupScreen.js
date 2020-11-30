@@ -14,10 +14,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useIsFocused } from '@react-navigation/native';
 import { addTasks } from '../redux/actions';
 import BottomTabs from '../navigation/BottomTab';
-import { Input } from "react-native-elements";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { Input } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { TextInput } from 'react-native';
-
 
 export default function GroupScreen({ navigation }) {
   const [value, onChangeText] = React.useState('');
@@ -35,7 +34,7 @@ export default function GroupScreen({ navigation }) {
   }, [isFocused]);
 
   async function getTasks() {
-    const response = await fetch(`http://192.168.43.13:3100/groupTasks`, {
+    const response = await fetch(`http://192.168.0.108:3100/groupTasks`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -47,8 +46,8 @@ export default function GroupScreen({ navigation }) {
     dispatch(addTasks(tasks));
   }
 
-    async function saveNewTask() {
-    const response = await fetch('http://192.168.43.13:3100/newTask', {
+  async function saveNewTask() {
+    const response = await fetch('http://192.168.0.108:3100/newTask', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -58,9 +57,9 @@ export default function GroupScreen({ navigation }) {
 
     const tasks = await response.json();
 
-      dispatch(addTasks(tasks));
-      SetTougle(false)
-      onChangeText('')
+    dispatch(addTasks(tasks));
+    SetTougle(false);
+    onChangeText('');
   }
 
   useEffect(() => {
@@ -71,28 +70,30 @@ export default function GroupScreen({ navigation }) {
     <ScrollView style={styles.container}>
       {tasksStore === undefined && <ActivityIndicator />}
       {tasksStore !== undefined && (
-        <View >
+        <View>
           <Button
             title='Leaderboard'
             onPress={() => navigation.navigate('Leaderboard')}
           />
 
           <Text style={styles.accountName}>Tasks</Text>
-          <TouchableOpacity onPress={() => SetTougle(true)} style={styles.roundButton1} ><Text>+</Text></TouchableOpacity>
-          {tougle !== false &&
-          <View >  
-          <TextInput
-            style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-            placeholder="Enter new task here"
-            onChangeText={text => onChangeText(text)}
-            value={value}
-            />
-          <Button
-            title='Save new task'
-            onPress={() => saveNewTask()}
-            />
+          <TouchableOpacity
+            onPress={() => SetTougle(true)}
+            style={styles.roundButton1}
+          >
+            <Text>+</Text>
+          </TouchableOpacity>
+          {tougle !== false && (
+            <View>
+              <TextInput
+                style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+                placeholder='Enter new task here'
+                onChangeText={(text) => onChangeText(text)}
+                value={value}
+              />
+              <Button title='Save new task' onPress={() => saveNewTask()} />
             </View>
-          }
+          )}
 
           {tasksStore.tasks.map((item) => {
             return (
@@ -102,7 +103,6 @@ export default function GroupScreen({ navigation }) {
                 navigation={navigation}
               />
             );
-
           })}
         </View>
       )}
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
     // alignItems: 'center',
     // justifyContent: 'center',
   },
-    text: {
+  text: {
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     marginTop: 60,
@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
     marginTop: 22,
     marginRight: 20,
-  }, 
+  },
   roundButton1: {
     width: 40,
     height: 40,
@@ -140,7 +140,5 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     backgroundColor: 'lightblue',
   },
-  picture: {
-    
-  }
+  picture: {},
 });
