@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import {
   StyleSheet,
@@ -7,7 +8,9 @@ import {
   ScrollView,
   TouchableOpacity,
   ActivityIndicator,
+  ImageBackground
 } from 'react-native';
+
 
 import GroupTasks from '../compenents/ComponentsGroupScreen/GroupTasks';
 import { useSelector, useDispatch } from 'react-redux';
@@ -67,6 +70,8 @@ export default function GroupScreen({ navigation }) {
   }, []);
 
   return (
+    
+        <ImageBackground style={styles.background} source={require('../assets/TaskMaster.jpg')} >
     <ScrollView style={styles.container}>
       {tasksStore === undefined && <ActivityIndicator />}
       {tasksStore !== undefined && (
@@ -107,15 +112,17 @@ export default function GroupScreen({ navigation }) {
         </View>
       )}
     </ScrollView>
+      </ ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    // alignItems: 'center',
-    // justifyContent: 'center',
+  background: {
+    
+    alignItems: 'center',
+    height: 1000,
+    width: '100%',
+    alignSelf: 'stretch',
   },
   text: {
     flexDirection: 'row',

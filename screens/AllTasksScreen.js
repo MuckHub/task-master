@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { StyleSheet, View, ScrollView } from 'react-native';
+import React, { useEffect} from 'react';
+import { StyleSheet, View, ScrollView, ImageBackground } from 'react-native';
 import AllTasks from '../compenents/ComponentsGroupScreen/AllTasks';
 import { useSelector, useDispatch } from 'react-redux';
 import { addAllTasks } from '../redux/actions';
@@ -36,8 +36,10 @@ export default function AllTasksScreen({ navigation }) {
   }, []);
 
   return (
-    <ScrollView style={styles.container}>
+      <ImageBackground style={styles.background} source={require('../assets/TaskMaster.jpg')} >
+    <ScrollView style={styles.scroll} >
       {allTasksStore !== undefined && (
+
         <View>
           {allTasksStore.map((item) => {
             return (
@@ -49,15 +51,20 @@ export default function AllTasksScreen({ navigation }) {
               />
             );
           })}
+
         </View>
       )}
     </ScrollView>
+      </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
+  background: {
+    paddingTop: 100,
+    alignItems: 'center',
+    height: 1000,
+    width: '100%',
+    alignSelf: 'stretch',
   },
 });

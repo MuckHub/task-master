@@ -2,11 +2,11 @@ const Group = require('../models/group.model');
 const Task = require('../models/task.model');
 
 const leaderboard = async (req, res) => {
+  console.log(req.body.group);
   try {
+    
     const allTasks = await Group.findOne({ name: req.body.group });
-
     let arr = [];
-
     for (let i = 0; i < allTasks.tasks.length; i++) {
       for (let y = 0; y < allTasks.tasks[i].completed.length; y++) {
         arr.push(allTasks.tasks[i].completed[y]);
@@ -30,9 +30,12 @@ const leaderboard = async (req, res) => {
         finalResult.push({ login: prop, points: counter[prop] });
       }
     }
-    
 
-    res.send(finalResult);
+  }
+  // console.log(finalResult);
+  res.send(finalResult);
+ 
+
   } catch (error) {
     res.sendStatus(500).end();
   }
