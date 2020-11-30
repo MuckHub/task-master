@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { StyleSheet, View, ScrollView } from 'react-native';
 import AllTasks from '../compenents/ComponentsGroupScreen/AllTasks';
 import { useSelector, useDispatch } from 'react-redux';
 import { addAllTasks } from '../redux/actions';
@@ -15,11 +15,12 @@ export default function AllTasksScreen({ navigation }) {
     getAllTasks();
   }, [isFocused]);
 
+
   let groupsStore = useSelector((store) => store.groups);
   let allTasksStore = useSelector((store) => store.allTasks);
 
   async function getAllTasks() {
-    const response = await fetch('http://192.168.0.108:3100/allTasks', {
+    const response = await fetch('http://localhost:3100/allTasks', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -30,7 +31,7 @@ export default function AllTasksScreen({ navigation }) {
 
     dispatch(addAllTasks(allTasks));
   }
-
+  
   useEffect(() => {
     getAllTasks();
   }, []);

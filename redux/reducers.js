@@ -8,6 +8,7 @@ import {
   ADD_POSTS,
   ADD_EMPTY_POSTS,
   ADD_ALL_TASKS,
+  ADD_BOARD,
 } from './types';
 
 
@@ -36,6 +37,10 @@ export const reducers = (state = { isAuth: null }, action) => {
 
     case ADD_ALL_TASKS:
       return {...state, allTasks: action.payload.allTasks};
+    
+    case ADD_BOARD:
+      console.log('>>>>>', action.payload)
+      return {...state, chart: action.payload.chart};
 
     default:
       return state;

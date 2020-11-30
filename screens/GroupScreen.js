@@ -8,11 +8,9 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import GroupTasks from '../compenents/ComponentsGroupScreen/GroupTasks';
-import AllTasks from '../compenents/ComponentsGroupScreen/AllTasks';
 import { useSelector, useDispatch } from 'react-redux';
 import { useIsFocused } from '@react-navigation/native';
 import { addTasks } from '../redux/actions';
-import BottomTabs from '../navigation/BottomTab';
 
 export default function GroupScreen({ navigation }) {
   let group = useSelector((store) => store.groupName);
@@ -27,7 +25,7 @@ export default function GroupScreen({ navigation }) {
   }, [isFocused]);
 
   async function getTasks() {
-    const response = await fetch(`http://192.168.0.108:3100/groupTasks`, {
+    const response = await fetch(`http://localhost:3100/groupTasks`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
