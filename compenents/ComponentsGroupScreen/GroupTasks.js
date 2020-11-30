@@ -32,20 +32,24 @@ export default function GroupTasks({ completed, title, navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    width: 350,
+    justifyContent: 'center',
   },
   item: {
+    textAlignVertical: 'center',
     padding: 10,
-    marginVertical: 8,
-    marginHorizontal: 16,
+    marginVertical: 10,
     borderWidth: 2,
-    borderColor: 'blue',
+    borderColor: 'white',
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    borderRadius: 15,
+    width: 350,
   },
   title: {
-    fontSize: 13,
-    padding: 9,
+    fontSize: 12,
+    padding: 10,
   },
 });
 

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { StyleSheet, Text, View, Button, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Button, ScrollView, ImageBackground } from 'react-native';
 import GroupTasks from '../compenents/ComponentsGroupScreen/GroupTasks';
 import { useSelector, useDispatch } from 'react-redux';
 import { useIsFocused } from '@react-navigation/native';
@@ -35,6 +35,8 @@ export default function GroupScreen({ navigation }) {
   }, []);
 
   return (
+    
+        <ImageBackground style={styles.background} source={require('../assets/TaskMaster.jpg')} >
     <ScrollView style={styles.container}>
       {tasksStore !== undefined && (
         <View>
@@ -54,14 +56,16 @@ export default function GroupScreen({ navigation }) {
         </View>
       )}
     </ScrollView>
+      </ ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    // alignItems: 'center',
-    // justifyContent: 'center',
+  background: {
+    
+    alignItems: 'center',
+    height: 1000,
+    width: '100%',
+    alignSelf: 'stretch',
   },
 });

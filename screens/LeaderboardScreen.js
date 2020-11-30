@@ -9,9 +9,9 @@ export default function LeaderboardScreen({ navigation }) {
   const dispatch = useDispatch();
 
   let group = useSelector((store) => store.groupName);
-
+console.log('dispatch', group);
   let chartStore = useSelector((store) => store.chart);
-  console.log('dispatch', chartStore);
+  
 
   async function getBoard() {
     
