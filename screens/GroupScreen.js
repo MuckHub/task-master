@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import {
   StyleSheet,
@@ -8,9 +7,8 @@ import {
   ScrollView,
   TouchableOpacity,
   ActivityIndicator,
-  ImageBackground
+  ImageBackground,
 } from 'react-native';
-
 
 import GroupTasks from '../compenents/ComponentsGroupScreen/GroupTasks';
 import { useSelector, useDispatch } from 'react-redux';
@@ -70,55 +68,56 @@ export default function GroupScreen({ navigation }) {
   }, []);
 
   return (
-    
-        <ImageBackground style={styles.background} source={require('../assets/TaskMaster.jpg')} >
-    <ScrollView style={styles.container}>
-      {tasksStore === undefined && <ActivityIndicator />}
-      {tasksStore !== undefined && (
-        <View>
-          <Button
-            title='Leaderboard'
-            onPress={() => navigation.navigate('Leaderboard')}
-          />
+    <ImageBackground
+      style={styles.background}
+      source={require('../assets/TaskMaster.jpg')}
+    >
+      <ScrollView style={styles.container}>
+        {tasksStore === undefined && <ActivityIndicator />}
+        {tasksStore !== undefined && (
+          <View>
+            <Button
+              title='Leaderboard'
+              onPress={() => navigation.navigate('Leaderboard')}
+            />
 
-          <Text style={styles.accountName}>Tasks</Text>
-          <TouchableOpacity
-            onPress={() => (tougle ? SetTougle(false) : SetTougle(true))}
-            style={styles.roundButton1}
-          >
-            <Text>+</Text>
-          </TouchableOpacity>
-          {tougle !== false && (
-            <View>
-              <TextInput
-                style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-                placeholder='Enter new task here'
-                onChangeText={(text) => onChangeText(text)}
-                value={value}
-              />
-              <Button title='Save new task' onPress={() => saveNewTask()} />
-            </View>
-          )}
+            <Text style={styles.accountName}>Tasks</Text>
+            <TouchableOpacity
+              onPress={() => (tougle ? SetTougle(false) : SetTougle(true))}
+              style={styles.roundButton1}
+            >
+              <Text>+</Text>
+            </TouchableOpacity>
+            {tougle !== false && (
+              <View>
+                <TextInput
+                  style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+                  placeholder='Enter new task here'
+                  onChangeText={(text) => onChangeText(text)}
+                  value={value}
+                />
+                <Button title='Save new task' onPress={() => saveNewTask()} />
+              </View>
+            )}
 
-          {tasksStore.tasks.map((item) => {
-            return (
-              <GroupTasks
-                completed={item.completed}
-                title={item.taskName}
-                navigation={navigation}
-              />
-            );
-          })}
-        </View>
-      )}
-    </ScrollView>
-      </ ImageBackground>
+            {tasksStore.tasks.map((item) => {
+              return (
+                <GroupTasks
+                  completed={item.completed}
+                  title={item.taskName}
+                  navigation={navigation}
+                />
+              );
+            })}
+          </View>
+        )}
+      </ScrollView>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
   background: {
-    
     alignItems: 'center',
     height: 1000,
     width: '100%',

@@ -4,7 +4,6 @@ const Task = require('../models/task.model');
 const leaderboard = async (req, res) => {
   console.log(req.body.group);
   try {
-    
     const allTasks = await Group.findOne({ name: req.body.group });
     let arr = [];
     for (let i = 0; i < allTasks.tasks.length; i++) {
@@ -31,11 +30,8 @@ const leaderboard = async (req, res) => {
       }
     }
 
-  }
-  // console.log(finalResult);
-  res.send(finalResult);
- 
-
+    // console.log(finalResult);
+    res.send(finalResult);
   } catch (error) {
     res.sendStatus(500).end();
   }
