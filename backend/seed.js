@@ -23,21 +23,20 @@ async function seedBase() {
     ],
   });
   let group1 = await new Group({
-    name: 'bootcamp',
+    name: 'friends',
     image: 'http://placeimg.com/640/480',
     tasks: [
-      { taskId: '0', taskName: 'Сделай мостик! Нужен фото пруф!' },
-      { taskId: '1', taskName: 'Virtual Beer Pong' },
-      { taskId: '2', taskName: 'Recreate a Famous Movie Scene' },
+      { taskId: '7', taskName: 'Сходить в зал' },
+      { taskId: '8', taskName: 'Подарить подарок' },
+      { taskId: '9', taskName: 'Украсить дом к Рождеству' },
     ],
   });
   let group2 = await new Group({
-    name: 'work',
+    name: 'family',
     image: 'http://placeimg.com/640/480',
     tasks: [
-      { taskId: '3', taskName: 'Нарисуй ёлку' },
-      { taskId: '4', taskName: 'Испеки торт' },
-      { taskId: '5', taskName: 'Boss Bitch Fashion Show' },
+      { taskId: '11', taskName: 'Приготовить ужин для всей семьи' },
+      { taskId: '22', taskName: 'Купить что-то полезное для дома' },
     ],
   });
   let task1 = await new Task({
@@ -64,8 +63,8 @@ async function seedBase() {
   });
   // await user1.save();
   // await user2.save();
-  // await group1.save();
-  // await group2.save();
+  await group1.save();
+  await group2.save();
   // await task1.save();
   // await task2.save();
 }

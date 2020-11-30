@@ -1,8 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { useDispatch } from 'react-redux';
-import { StyleSheet, Text, View, Button, ScrollView } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  ScrollView,
+  ActivityIndicator,
+  SafeAreaView,
+  ImageBackground,
+} from 'react-native';
 import { AccountName } from '../compenents/ComponentMain/AccountName';
 import { Groups } from '../compenents/ComponentMain/Groups';
 import GroupPicture from '../compenents/ComponentMain/GroupPicture';
@@ -16,7 +24,7 @@ export default function MainScreen({ navigation }) {
   let groupsStore = useSelector((store) => store.groups);
 
   async function getGroups() {
-    const response = await fetch('http://localhost:3100/account', { 
+    const response = await fetch('http://192.168.0.108:3100/account', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -32,32 +40,70 @@ export default function MainScreen({ navigation }) {
   }, []);
 
   return (
-    <ScrollView style={styles.container}>
-      {groupsStore !== undefined && (
-        <ScrollView style={styles.container}>
-          <AccountName />
-          <Button title='LOGOUT' onPress={() => navigation.navigate('Auth')} />
+    <ImageBackground
+      source={require('../assets/main.jpg')}
+      style={styles.image}
+    >
+      <ScrollView style={styles.container}>
+        {groupsStore === undefined && <ActivityIndicator />}
+        {groupsStore !== undefined && (
+          <ScrollView style={styles.container}>
+            <SafeAreaView>
+              <View style={styles.account}>
+                <AccountName navigation={navigation} />
+              </View>
 
-          <Groups />
-
-          <GroupContainer>
-            {groupsStore.map((el) => {
-              return (
-                <View>
-                  <GroupPicture name={el.groupName} navigation={navigation} />
-                </View>
-              );
-            })}
-          </GroupContainer>
-        </ScrollView>
-      )}
-    </ScrollView>
+              <View style={styles.groups}>
+                <Groups />
+                <GroupContainer>
+                  <View style={styles.items}>
+                    {groupsStore.map((el) => {
+                      return (
+                        <GroupPicture
+                          name={el.groupName}
+                          navigation={navigation}
+                        />
+                      );
+                    })}
+                  </View>
+                </GroupContainer>
+              </View>
+            </SafeAreaView>
+          </ScrollView>
+        )}
+      </ScrollView>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  account: {
+    flex: 1,
+    borderRadius: 30,
+    margin: 20,
+    borderWidth: 0,
     backgroundColor: '#fff',
+  },
+  groups: {
+    flex: 1,
+    borderRadius: 30,
+    margin: 20,
+    height: 450,
+    borderWidth: 0,
+    backgroundColor: '#fff',
+  },
+  items: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    flex: 1,
+  },
+  image: {
+    flex: 1,
+    width: '100%',
+    height: '100%',
+    alignItems: 'center',
   },
 });

@@ -1,11 +1,10 @@
-import React, { useEffect }  from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, Text, View, Button, ScrollView } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { addBoard } from '../redux/actions';
-import Leaderboard from '../compenents/ComponentLeaderboard/Leaderboard'
+import Leaderboard from '../compenents/ComponentLeaderboard/Leaderboard';
 
 export default function LeaderboardScreen({ navigation }) {
-
   const dispatch = useDispatch();
 
   let group = useSelector((store) => store.groupName);
@@ -14,8 +13,7 @@ console.log('dispatch', group);
   
 
   async function getBoard() {
-    
-    const response = await fetch('http://localhost:3100/leaderboard', { 
+    const response = await fetch('http://192.168.0.108:3100/leaderboard', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -51,7 +49,6 @@ console.log('dispatch', group);
     </ScrollView>
   );
 }
-
 
 const styles = StyleSheet.create({
   container: {
