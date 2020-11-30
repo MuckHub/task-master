@@ -5,5 +5,4 @@ const taskNameController = require('../controllers/taskName-controller');
 
 router.post('/', taskNameController.getPosts);
 
-
 module.exports = router;
