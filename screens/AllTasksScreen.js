@@ -3,14 +3,20 @@ import { StyleSheet, View, ScrollView } from 'react-native';
 import AllTasks from '../compenents/ComponentsGroupScreen/AllTasks';
 import { useSelector, useDispatch } from 'react-redux';
 import { addAllTasks } from '../redux/actions';
+import { useIsFocused } from '@react-navigation/native';
 
 export default function AllTasksScreen({ navigation }) {
   let user = useSelector((store) => store.isAuth);
   const dispatch = useDispatch();
 
+  const isFocused = useIsFocused();
+
+  useEffect(() => {
+    getAllTasks();
+  }, [isFocused]);
+
+
   let groupsStore = useSelector((store) => store.groups);
-
-
   let allTasksStore = useSelector((store) => store.allTasks);
 
   async function getAllTasks() {
@@ -22,6 +28,7 @@ export default function AllTasksScreen({ navigation }) {
       body: JSON.stringify({ groupsStore }),
     });
     const allTasks = await response.json();
+
     dispatch(addAllTasks(allTasks));
   }
   
@@ -38,6 +45,7 @@ export default function AllTasksScreen({ navigation }) {
               <AllTasks
                 name={item.taskName}
                 image={item.image}
+                completed={item.completed}
                 navigation={navigation}
               />
             );

@@ -1,5 +1,12 @@
 import React, { useEffect } from 'react';
-import { StyleSheet, Text, View, Button, ScrollView } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  ScrollView,
+  ActivityIndicator,
+} from 'react-native';
 import GroupTasks from '../compenents/ComponentsGroupScreen/GroupTasks';
 import { useSelector, useDispatch } from 'react-redux';
 import { useIsFocused } from '@react-navigation/native';
@@ -36,6 +43,7 @@ export default function GroupScreen({ navigation }) {
 
   return (
     <ScrollView style={styles.container}>
+      {tasksStore === undefined && <ActivityIndicator />}
       {tasksStore !== undefined && (
         <View>
           <Button
