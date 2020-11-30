@@ -39,9 +39,7 @@ export default function AddImageScreen({ route, navigation: { goBack } }) {
   };
 
   const addPicture = async () => {
-
-    const response = await fetch('http://localhost:3100/addImg', {
-
+    const response = await fetch('http://192.168.0.108:3100/addImg', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

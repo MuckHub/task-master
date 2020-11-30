@@ -21,7 +21,7 @@ export default function TaskScreen({ route, navigation }) {
   const postsRedux = useSelector((store) => store.posts);
 
   async function getPosts() {
-    const response = await fetch('http://localhost:3100/taskName', {
+    const response = await fetch('http://192.168.0.108:3100/taskName', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -15,12 +15,11 @@ export default function AllTasksScreen({ navigation }) {
     getAllTasks();
   }, [isFocused]);
 
-
   let groupsStore = useSelector((store) => store.groups);
   let allTasksStore = useSelector((store) => store.allTasks);
 
   async function getAllTasks() {
-    const response = await fetch('http://localhost:3100/allTasks', {
+    const response = await fetch('http://192.168.0.108:3100/allTasks', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -31,7 +30,7 @@ export default function AllTasksScreen({ navigation }) {
 
     dispatch(addAllTasks(allTasks));
   }
-  
+
   useEffect(() => {
     getAllTasks();
   }, []);
