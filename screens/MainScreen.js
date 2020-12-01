@@ -61,6 +61,7 @@ export default function MainScreen({ navigation }) {
                       return (
                         <GroupPicture
                           name={el.groupName}
+                          image={el.img}
                           navigation={navigation}
                         />
                       );
@@ -99,6 +100,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     flex: 1,
+    justifyContent: 'center',
+
+
   },
   image: {
     flex: 1,

@@ -21,7 +21,7 @@ export default function AllTasks({ name, image, completed, navigation }) {
           imageProps={image}
           rounded
           size='medium'
-          source={{ uri: 'https://images.app.goo.gl/5QkEdrhYe6UmgKLT6' }}
+          source={{ uri: image }}
           title='G'
         />
         <Text style={styles.title}>{name}</Text>
