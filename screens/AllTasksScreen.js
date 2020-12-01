@@ -19,7 +19,7 @@ export default function AllTasksScreen({ navigation }) {
   let allTasksStore = useSelector((store) => store.allTasks);
 
   async function getAllTasks() {
-    const response = await fetch('http://192.168.0.108:3100/allTasks', {
+    const response = await fetch('http://localhost:3100/allTasks', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -36,7 +36,7 @@ export default function AllTasksScreen({ navigation }) {
   }, []);
 
   return (
-      <ImageBackground style={styles.background} source={require('../assets/TaskMaster.jpg')} >
+    <ImageBackground style={styles.background} source={require('../assets/TaskMaster.jpg')} >
     <ScrollView style={styles.scroll} >
       {allTasksStore !== undefined && (
 
@@ -55,7 +55,8 @@ export default function AllTasksScreen({ navigation }) {
         </View>
       )}
     </ScrollView>
-      </ImageBackground>
+    </ImageBackground>
+    
   );
 }
 
