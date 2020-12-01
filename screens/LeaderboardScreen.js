@@ -13,6 +13,7 @@ console.log('dispatch', group);
   
 
   async function getBoard() {
+
     const response = await fetch('http://192.168.43.13:3100/leaderboard', {
       method: 'POST',
       headers: {

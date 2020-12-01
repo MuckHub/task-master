@@ -24,6 +24,7 @@ export default function SignUpScreen({ navigation: { goBack } }) {
   const [pass, setPass] = useState('');
 
   async function signupHandler() {
+
     const request = await fetch('http://192.168.43.13:3100/register', {
       method: 'POST',
       headers: {

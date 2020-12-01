@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { CheckBox } from 'react-native-elements';
-import { SafeAreaView, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, TouchableOpacity, ImageBackground } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 
 export default function GroupTasks({ completed, title, navigation }) {
@@ -12,21 +12,24 @@ export default function GroupTasks({ completed, title, navigation }) {
   if (completed && completed.includes(user)) {
     isChecked = true;
   }
+
   return (
+      
     <SafeAreaView style={styles.container}>
-      <TouchableOpacity
-        onPress={() => navigation.navigate('Task', { taskName: title })}
-        style={[styles.item]}
-      >
-        <Text style={styles.title}>{title}</Text>
-        <CheckBox
-          checked={isChecked}
-          onIconPress={() => console.log('onIconPress()')}
-          size={30}
-          uncheckedColor='#F00'
-        />
-      </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Task', { taskName: title })}
+          style={[styles.item]}
+        >
+          <Text style={styles.title}>{title}</Text>
+          <CheckBox
+            checked={isChecked}
+            onIconPress={() => console.log('onIconPress()')}
+            size={30}
+            uncheckedColor='#F00'
+          />
+        </TouchableOpacity>
     </SafeAreaView>
+
   );
 }
 

@@ -19,6 +19,7 @@ export default function AllTasksScreen({ navigation }) {
   let allTasksStore = useSelector((store) => store.allTasks);
 
   async function getAllTasks() {
+
     const response = await fetch('http://192.168.43.13:3100/allTasks', {
       method: 'POST',
       headers: {
@@ -36,6 +37,7 @@ export default function AllTasksScreen({ navigation }) {
   }, []);
 
   return (
+
     <ImageBackground
       style={styles.background}
       source={require('../assets/TaskMaster.jpg')}
@@ -57,6 +59,7 @@ export default function AllTasksScreen({ navigation }) {
         )}
       </ScrollView>
     </ImageBackground>
+
   );
 }
 

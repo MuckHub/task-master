@@ -24,6 +24,7 @@ export default function MainScreen({ navigation }) {
   let groupsStore = useSelector((store) => store.groups);
 
   async function getGroups() {
+
     const response = await fetch('http://192.168.43.13:3100/account', {
       method: 'POST',
       headers: {

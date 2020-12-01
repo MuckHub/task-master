@@ -35,6 +35,7 @@ export default function GroupScreen({ navigation }) {
   }, [isFocused]);
 
   async function getTasks() {
+
     const response = await fetch(`http://192.168.43.13:3100/groupTasks`, {
       method: 'POST',
       headers: {
@@ -48,6 +49,7 @@ export default function GroupScreen({ navigation }) {
   }
 
   async function saveNewTask() {
+
     const response = await fetch('http://192.168.43.13:3100/newTask', {
       method: 'POST',
       headers: {
