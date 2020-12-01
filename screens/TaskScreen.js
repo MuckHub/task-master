@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Button, ScrollView, ImageBackground, SafeAreaView, TouchableOpacity } from 'react-native';
+
+import { StyleSheet, Text, View, Button, ScrollView, Image, ImageBackground, SafeAreaView, TouchableOpacity } from 'react-native';
+
 import TaskName from '../compenents/ComponentsTaskScreen/TaskName';
 import TaskImage from '../compenents/ComponentsTaskScreen/TaskImage';
 import TaskDescription from '../compenents/ComponentsTaskScreen/TaskDescription';
 import { addPostsAC, addEmptyPostAC } from '../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
-
 import { useIsFocused } from '@react-navigation/native';
-import { Image } from 'react-native-elements';
 
 export default function TaskScreen({ route, navigation }) {
 
@@ -24,7 +24,8 @@ export default function TaskScreen({ route, navigation }) {
   const postsRedux = useSelector((store) => store.posts);
 
   async function getPosts() {
-    const response = await fetch('http://localhost:3100/taskName', {
+
+    const response = await fetch('http://192.168.43.13:3100/taskName', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -44,6 +45,14 @@ export default function TaskScreen({ route, navigation }) {
     getPosts();
   }, []);
 
+  async function addLike(posts) {
+    if (posts.error) {
+      dispatch(addEmptyPostAC());
+    } else {
+      dispatch(addPostsAC(posts));
+    }
+  }
+
   return (
     <ImageBackground style={styles.background} source={require('../assets/TaskMaster.jpg')} >
           <ScrollView>
@@ -51,6 +60,7 @@ export default function TaskScreen({ route, navigation }) {
                 <TouchableOpacity style={styles.buttonAdd}>
                       <Text style={styles.button} onPress={()=> navigation.navigate('AddImage', {taskName:taskName, navigation: navigation,})}>ADD</Text>
                     </TouchableOpacity>
+
 
           
           {postsRedux !== undefined && postsRedux.length !== 0 && (
@@ -78,6 +88,7 @@ export default function TaskScreen({ route, navigation }) {
           )}
            
       </SafeAreaView>
+
         </ScrollView>
     </ImageBackground>
   );

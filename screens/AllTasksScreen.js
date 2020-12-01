@@ -1,4 +1,4 @@
-import React, { useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, View, ScrollView, ImageBackground } from 'react-native';
 import AllTasks from '../compenents/ComponentsGroupScreen/AllTasks';
 import { useSelector, useDispatch } from 'react-redux';
@@ -19,7 +19,8 @@ export default function AllTasksScreen({ navigation }) {
   let allTasksStore = useSelector((store) => store.allTasks);
 
   async function getAllTasks() {
-    const response = await fetch('http://localhost:3100/allTasks', {
+
+    const response = await fetch('http://192.168.43.13:3100/allTasks', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -36,27 +37,29 @@ export default function AllTasksScreen({ navigation }) {
   }, []);
 
   return (
-    <ImageBackground style={styles.background} source={require('../assets/TaskMaster.jpg')} >
-    <ScrollView style={styles.scroll} >
-      {allTasksStore !== undefined && (
 
-        <View>
-          {allTasksStore.map((item) => {
-            return (
-              <AllTasks
-                name={item.taskName}
-                image={item.image}
-                completed={item.completed}
-                navigation={navigation}
-              />
-            );
-          })}
-
-        </View>
-      )}
-    </ScrollView>
+    <ImageBackground
+      style={styles.background}
+      source={require('../assets/TaskMaster.jpg')}
+    >
+      <ScrollView style={styles.scroll}>
+        {allTasksStore !== undefined && (
+          <View>
+            {allTasksStore.map((item) => {
+              return (
+                <AllTasks
+                  name={item.taskName}
+                  image={item.image}
+                  completed={item.completed}
+                  navigation={navigation}
+                />
+              );
+            })}
+          </View>
+        )}
+      </ScrollView>
     </ImageBackground>
-    
+
   );
 }
 

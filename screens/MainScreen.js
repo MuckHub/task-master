@@ -24,7 +24,8 @@ export default function MainScreen({ navigation }) {
   let groupsStore = useSelector((store) => store.groups);
 
   async function getGroups() {
-    const response = await fetch('http://localhost:3100/account', {
+
+    const response = await fetch('http://192.168.43.13:3100/account', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -61,6 +62,7 @@ export default function MainScreen({ navigation }) {
                       return (
                         <GroupPicture
                           name={el.groupName}
+                          image={el.img}
                           navigation={navigation}
                         />
                       );
@@ -99,6 +101,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     flex: 1,
+    justifyContent: 'center',
+
+
   },
   image: {
     flex: 1,
