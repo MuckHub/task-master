@@ -24,8 +24,7 @@ export default function MainScreen({ navigation }) {
   let groupsStore = useSelector((store) => store.groups);
 
   async function getGroups() {
-
-    const response = await fetch('http://192.168.43.13:3100/account', {
+    const response = await fetch('http://192.168.0.108:3100/account', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -102,8 +101,6 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     flex: 1,
     justifyContent: 'center',
-
-
   },
   image: {
     flex: 1,

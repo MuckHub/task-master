@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   ImageBackground,
+  TouchableWithoutFeedback,
 } from 'react-native';
 
 import GroupTasks from '../compenents/ComponentsGroupScreen/GroupTasks';
@@ -35,8 +36,7 @@ export default function GroupScreen({ navigation }) {
   }, [isFocused]);
 
   async function getTasks() {
-
-    const response = await fetch(`http://192.168.43.13:3100/groupTasks`, {
+    const response = await fetch(`http://192.168.0.108:3100/groupTasks`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -49,8 +49,7 @@ export default function GroupScreen({ navigation }) {
   }
 
   async function saveNewTask() {
-
-    const response = await fetch('http://192.168.43.13:3100/newTask', {
+    const response = await fetch('http://192.168.0.108:3100/newTask', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -70,51 +69,67 @@ export default function GroupScreen({ navigation }) {
   }, []);
 
   return (
-    <ImageBackground
-      style={styles.background}
-      source={require('../assets/TaskMaster.jpg')}
-    >
-      <ScrollView style={styles.container}>
-        {tasksStore === undefined && <ActivityIndicator />}
-        {tasksStore !== undefined && (
-          <View>
-            <Button
-              title='Leaderboard'
-              onPress={() => navigation.navigate('Leaderboard')}
-            />
+    <TouchableWithoutFeedback onPress={() => SetTougle(false)}>
+      <ImageBackground
+        style={styles.background}
+        source={require('../assets/TaskMaster.jpg')}
+      >
+        <ScrollView style={styles.container}>
+          {tasksStore === undefined && <ActivityIndicator />}
+          {tasksStore !== undefined && (
+            <View>
+              <View style={styles.buttons}>
+                <TouchableOpacity
+                  style={styles.button}
+                  onPress={() => navigation.navigate('Leaderboard')}
+                >
+                  <Text style={styles.textLeaderboard}>Leaderboard</Text>
+                </TouchableOpacity>
 
-            <Text style={styles.accountName}>Tasks</Text>
-            <TouchableOpacity
-              onPress={() => (tougle ? SetTougle(false) : SetTougle(true))}
-              style={styles.roundButton1}
-            >
-              <Text>+</Text>
-            </TouchableOpacity>
-            {tougle !== false && (
-              <View>
-                <TextInput
-                  style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-                  placeholder='Enter new task here'
-                  onChangeText={(text) => onChangeText(text)}
-                  value={value}
-                />
-                <Button title='Save new task' onPress={() => saveNewTask()} />
+                <TouchableOpacity
+                  style={styles.add}
+                  onPress={() => (tougle ? SetTougle(false) : SetTougle(true))}
+                >
+                  <Text style={styles.roundButton1} style={styles.textAdd}>
+                    Add new
+                  </Text>
+                </TouchableOpacity>
               </View>
-            )}
 
-            {tasksStore.tasks.map((item) => {
-              return (
-                <GroupTasks
-                  completed={item.completed}
-                  title={item.taskName}
-                  navigation={navigation}
-                />
-              );
-            })}
-          </View>
-        )}
-      </ScrollView>
-    </ImageBackground>
+              {tougle !== false && (
+                <View>
+                  <TextInput
+                    style={styles.input}
+                    placeholder='Enter new task here'
+                    onChangeText={(text) => onChangeText(text)}
+                    value={value}
+                  />
+
+                  <TouchableOpacity
+                    style={styles.add}
+                    onPress={() => saveNewTask()}
+                  >
+                    <Text style={styles.roundButton1} style={styles.textAdd}>
+                      Save
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              )}
+
+              {tasksStore.tasks.map((item) => {
+                return (
+                  <GroupTasks
+                    completed={item.completed}
+                    title={item.taskName}
+                    navigation={navigation}
+                  />
+                );
+              })}
+            </View>
+          )}
+        </ScrollView>
+      </ImageBackground>
+    </TouchableWithoutFeedback>
   );
 }
 
@@ -149,4 +164,43 @@ const styles = StyleSheet.create({
     backgroundColor: 'lightblue',
   },
   picture: {},
+  button: {
+    width: '35%',
+    backgroundColor: '#fb5b5a',
+    borderRadius: 25,
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 15,
+    marginBottom: 20,
+  },
+  textLeaderboard: {
+    color: 'white',
+    fontWeight: 'bold',
+  },
+  buttons: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  add: {
+    width: '28%',
+    backgroundColor: '#fb5b5a',
+    borderRadius: 25,
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 15,
+    marginBottom: 20,
+  },
+  textAdd: {
+    color: 'white',
+    fontWeight: 'bold',
+  },
+  input: {
+    height: 60,
+    backgroundColor: 'white',
+    borderColor: 'gray',
+    borderRadius: 10,
+    paddingHorizontal: 15,
+  },
 });
