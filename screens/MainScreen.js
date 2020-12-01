@@ -17,11 +17,6 @@ import GroupPicture from '../compenents/ComponentMain/GroupPicture';
 import GroupContainer from '../compenents/ComponentMain/GroupContainer';
 import { addGroupsMainAC } from '../redux/actions';
 
-const image = {
-  uri:
-    'https://products.ls.graphics/mesh-gradients/images/44.-Green-Yellow_1.jpg',
-};
-
 export default function MainScreen({ navigation }) {
   const user = useSelector((store) => store.isAuth);
   const dispatch = useDispatch();
@@ -45,34 +40,33 @@ export default function MainScreen({ navigation }) {
   }, []);
 
   return (
-    <ImageBackground source={image} style={styles.image}>
+    <ImageBackground
+      source={require('../assets/main.jpg')}
+      style={styles.image}
+    >
       <ScrollView style={styles.container}>
         {groupsStore === undefined && <ActivityIndicator />}
         {groupsStore !== undefined && (
           <ScrollView style={styles.container}>
             <SafeAreaView>
               <View style={styles.account}>
-                <AccountName />
+                <AccountName navigation={navigation} />
               </View>
-
-              <Button
-                title='LOGOUT'
-                onPress={() => navigation.navigate('Auth')}
-              />
 
               <View style={styles.groups}>
                 <Groups />
                 <GroupContainer>
-                  {groupsStore.map((el) => {
-                    return (
-                      <View>
+                  <View style={styles.items}>
+                    {groupsStore.map((el) => {
+                      return (
                         <GroupPicture
                           name={el.groupName}
+                          image={el.img}
                           navigation={navigation}
                         />
-                      </View>
-                    );
-                  })}
+                      );
+                    })}
+                  </View>
                 </GroupContainer>
               </View>
             </SafeAreaView>
@@ -89,19 +83,26 @@ const styles = StyleSheet.create({
   },
   account: {
     flex: 1,
-    borderRadius: 10,
+    borderRadius: 30,
     margin: 20,
-    height: 150,
     borderWidth: 0,
     backgroundColor: '#fff',
   },
   groups: {
     flex: 1,
-    borderRadius: 10,
+    borderRadius: 30,
     margin: 20,
-    height: 350,
+    height: 450,
     borderWidth: 0,
     backgroundColor: '#fff',
+  },
+  items: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    flex: 1,
+    justifyContent: 'center',
+
+
   },
   image: {
     flex: 1,

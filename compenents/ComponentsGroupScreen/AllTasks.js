@@ -21,7 +21,7 @@ export default function AllTasks({ name, image, completed, navigation }) {
           imageProps={image}
           rounded
           size='medium'
-          source={{ uri: 'https://images.app.goo.gl/5QkEdrhYe6UmgKLT6' }}
+          source={{ uri: image }}
           title='G'
         />
         <Text style={styles.title}>{name}</Text>
@@ -38,22 +38,23 @@ export default function AllTasks({ name, image, completed, navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    width: 350,
     justifyContent: 'center',
   },
   item: {
     textAlignVertical: 'center',
     padding: 10,
-    marginVertical: 8,
-    marginHorizontal: 16,
+    marginVertical: 10,
     borderWidth: 2,
-    borderColor: 'blue',
+    borderColor: 'white',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    backgroundColor: 'white',
+    borderRadius: 15,
+    width: 350,
   },
   title: {
-    fontSize: 10,
+    fontSize: 12,
     padding: 10,
   },
 });

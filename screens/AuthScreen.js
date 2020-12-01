@@ -14,10 +14,6 @@ import { useDispatch } from 'react-redux';
 import { isAuthAC } from '../redux/actions';
 import { addGroupsMainAC } from '../redux/actions';
 
-const image = {
-  uri: 'https://products.ls.graphics/mesh-gradients/images/22.-Shalimar_1.jpg',
-};
-
 export default function AuthScreen({ navigation }) {
   const [error, setError] = useState(null);
   const [login, setLogin] = useState('');
@@ -51,7 +47,10 @@ export default function AuthScreen({ navigation }) {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <View style={styles.container}>
-        <ImageBackground source={image} style={styles.image}>
+        <ImageBackground
+          source={require('../assets/auth.jpg')}
+          style={styles.image}
+        >
           <Text style={styles.logo}>Task Master</Text>
           {error && <Text style={styles.error}>{error}</Text>}
           <View style={styles.inputView}>

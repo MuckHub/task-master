@@ -14,7 +14,7 @@ import { useDispatch } from 'react-redux';
 import { signUp } from '../redux/actions';
 
 const image = {
-  uri: 'https://products.ls.graphics/mesh-gradients/images/22.-Shalimar_1.jpg',
+  uri: '',
 };
 
 export default function SignUpScreen({ navigation: { goBack } }) {
@@ -44,7 +44,10 @@ export default function SignUpScreen({ navigation: { goBack } }) {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <View style={styles.container}>
-        <ImageBackground source={image} style={styles.image}>
+        <ImageBackground
+          source={require('../assets/auth.jpg')}
+          style={styles.image}
+        >
           <Text style={styles.title}>Sign Up</Text>
           <View style={styles.inputView}>
             <TextInput
