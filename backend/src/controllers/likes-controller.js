@@ -25,8 +25,6 @@ const addLike = async (req, res) => {
       res.send({ error: 'no groups' });
     }
   } catch (error) {
-    console.log('sdsf');
-
     res.sendStatus(500).end();
   }
 };

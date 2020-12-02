@@ -1,15 +1,25 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, ImageBackground, TouchableOpacity, SafeAreaView } from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { useSelector } from 'react-redux';
 
 export default function ProfileScreen({ navigation }) {
+  const user = useSelector((store) => store.isAuth);
+  let avatar = require(`../assets/def_ava.jpg`);
+
+  if (user == 'Anton') {
+    avatar = require(`../assets/Anton.jpg`);
+  } else if (user == 'Aleksei') {
+    avatar = require(`../assets/Aleksei.jpg`);
+  }
+
   return (
-   
       <View style={styles.container}>
           <ImageBackground style={styles.background} source={require('../assets/TaskMaster.jpg')} >
         <View style={styles.profile}>
-          <Image style={styles.img} source={require('../assets/pic.jpg')} />
+          <Image style={styles.img} source={avatar} />
         </View>
-        <Text style={styles.name}>Роман Дубкин</Text>
+        <Text style={styles.name}>{user}</Text>
           <SafeAreaView>
             <TouchableOpacity style={[styles.item]}>
               <Text>EMAIL</Text>
@@ -20,8 +30,8 @@ export default function ProfileScreen({ navigation }) {
             <TouchableOpacity style={[styles.item]}>
               <Text>Groups</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={[styles.item]}>
-              <Text>Sign Out</Text>
+            <TouchableOpacity style={[styles.item]} onPress={() => navigation.navigate('Auth')}>
+              <Text >Sign Out</Text>
             </TouchableOpacity>
           </SafeAreaView>
           </ImageBackground>
@@ -35,8 +45,8 @@ const styles = StyleSheet.create({
     padding: 100,
   },
   img: {
-    width: 150,
-    height: 150,
+    width: 170,
+    height: 170,
     borderWidth: 2,
     borderRadius: 100, 
     borderColor: 'white',
@@ -51,7 +61,8 @@ const styles = StyleSheet.create({
   },
   name: {
     padding: 80,
-    fontSize: 20,
+    fontSize: 40,
+    fontWeight: 'bold',
   },
   item: {
     textAlignVertical: 'center',

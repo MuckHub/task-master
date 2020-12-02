@@ -8,7 +8,7 @@ export default function LeaderboardScreen({ navigation }) {
   const dispatch = useDispatch();
 
   let group = useSelector((store) => store.groupName);
-  console.log('dispatch', group);
+  
   let chartStore = useSelector((store) => store.chart);
 
   async function getBoard() {
@@ -22,7 +22,6 @@ export default function LeaderboardScreen({ navigation }) {
       body: JSON.stringify({ group }),
     });
     const chart = await response.json();
-    console.log('chart', chart);
 
     dispatch(addBoard(chart));
   }
