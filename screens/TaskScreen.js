@@ -62,69 +62,70 @@ export default function TaskScreen({ route, navigation }) {
   }
 
   return (
-    <ScrollView>
-      <ImageBackground
-        style={styles.background}
-        source={require('../assets/TaskMaster.jpg')}
-      >
-        <TouchableOpacity style={styles.buttonAdd}>
-          <Text
-            style={styles.button}
-            onPress={() =>
-              navigation.navigate('AddImage', {
-                taskName: taskName,
-                navigation: navigation,
-              })
-            }
-          >
-            ADD
-          </Text>
-        </TouchableOpacity>
-
-        {postsRedux !== undefined && postsRedux.length !== 0 && (
-          <View>
-            {postsRedux.map((el) => {
-              let isLiked = el.likesCount.includes(user);
-
-              let avatar = require(`../assets/def_ava.jpg`);
-              if (el.login == 'Anton') {
-                avatar = require(`../assets/Anton.jpg`);
-              } else if (el.login == 'Aleksei') {
-                avatar = require(`../assets/Aleksei.jpg`);
+    <ImageBackground
+      style={styles.background}
+      source={require('../assets/TaskMaster.jpg')}
+    >
+      <ScrollView style={styles.scroll}>
+        <View style={styles.post}>
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity
+              style={styles.buttonAdd}
+              onPress={() =>
+                navigation.navigate('AddImage', {
+                  taskName: taskName,
+                  navigation: navigation,
+                })
               }
-              return (
-                <View style={styles.container}>
-                  <View style={styles.login}>
-                    <Image style={styles.avatar} source={avatar} />
-                    <Text style={styles.accountName}>{el.login}</Text>
-                  </View>
-                  <TaskImage
-                    url={el.image}
-                    taskName={taskName}
-                    addLike={addLike}
-                    count={el.likesCount}
-                  />
-                  <View style={styles.likesContainer}>
-                    <Text style={styles.likes}>
-                      Likes: {el.likesCount.length}
-                    </Text>
-
-                    <Image
-                      style={styles.img}
-                      source={
-                        isLiked
-                          ? require('../compenents/ComponentsTaskScreen/pics/heart.png')
-                          : require('../compenents/ComponentsTaskScreen/pics/heart-outline.png')
-                      }
-                    />
-                  </View>
-                </View>
-              );
-            })}
+            >
+              <Text style={styles.button}>ADD</Text>
+            </TouchableOpacity>
           </View>
-        )}
-      </ImageBackground>
-    </ScrollView>
+
+          {postsRedux !== undefined && postsRedux.length !== 0 && (
+            <View>
+              {postsRedux.map((el) => {
+                let isLiked = el.likesCount.includes(user);
+
+                let avatar = require(`../assets/def_ava.jpg`);
+                if (el.login == 'Anton') {
+                  avatar = require(`../assets/Anton.jpg`);
+                } else if (el.login == 'Aleksei') {
+                  avatar = require(`../assets/Aleksei.jpg`);
+                }
+                return (
+                  <View style={styles.container} key={el.image}>
+                    <View style={styles.login}>
+                      <Image style={styles.avatar} source={avatar} />
+                      <Text style={styles.accountName}>{el.login}</Text>
+                    </View>
+                    <TaskImage
+                      url={el.image}
+                      taskName={taskName}
+                      addLike={addLike}
+                      count={el.likesCount}
+                    />
+                    <View style={styles.likesContainer}>
+                      <Image
+                        style={styles.img}
+                        source={
+                          isLiked
+                            ? require('../compenents/ComponentsTaskScreen/pics/heart.png')
+                            : require('../compenents/ComponentsTaskScreen/pics/heart-outline.png')
+                        }
+                      />
+                      <Text style={styles.likes}>
+                        Likes: {el.likesCount.length}
+                      </Text>
+                    </View>
+                  </View>
+                );
+              })}
+            </View>
+          )}
+        </View>
+      </ScrollView>
+    </ImageBackground>
   );
 }
 
@@ -132,7 +133,7 @@ const styles = StyleSheet.create({
   background: {
     alignItems: 'center',
     width: '100%',
-    height: '120%',
+    height: '100%',
     alignSelf: 'stretch',
     resizeMode: 'cover',
   },
@@ -174,7 +175,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
   },
   buttonAdd: {
-    marginLeft: 10,
+    marginRight: 20,
     width: '28%',
     backgroundColor: '#fb5b5a',
     borderRadius: 25,
@@ -182,7 +183,7 @@ const styles = StyleSheet.create({
     width: 50,
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 15,
+    marginTop: 5,
     marginBottom: 10,
   },
   button: {
@@ -193,11 +194,25 @@ const styles = StyleSheet.create({
     width: 35,
     height: 35,
     marginRight: 20,
+    marginLeft: 10,
   },
   likesContainer: {
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
     flexDirection: 'row',
     alignContent: 'center',
     alignItems: 'center',
+  },
+  scroll: {
+    width: '100%',
+  },
+  post: {
+    padding: 15,
+    marginTop: 20,
+    marginBottom: 10,
+    borderRadius: 10,
+  },
+  buttonContainer: {
+    justifyContent: 'flex-end',
+    flexDirection: 'row',
   },
 });

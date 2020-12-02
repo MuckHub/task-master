@@ -45,6 +45,7 @@ export default function LeaderboardScreen({ navigation }) {
             {chartStore.map((item) => {
               return (
                 <Leaderboard
+                  key={item.login}
                   login={item.login}
                   points={item.points}
                   navigation={navigation}

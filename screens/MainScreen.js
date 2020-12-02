@@ -60,6 +60,7 @@ export default function MainScreen({ navigation }) {
                     {groupsStore.map((el) => {
                       return (
                         <GroupPicture
+                          key={el.groupId}
                           name={el.groupName}
                           image={el.img}
                           navigation={navigation}

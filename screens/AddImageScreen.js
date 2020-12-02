@@ -67,10 +67,8 @@ export default function AddImageScreen({ route, navigation: { goBack } }) {
       <View style={styles.wrapper}>
         {/* {!image && <Button title='Take a Picture' onPress={takePhoto} />} */}
         {!image && (
-          <TouchableOpacity style={styles.buttonAdd}>
-            <Text style={styles.button} onPress={takePhoto}>
-              Take a Picture
-            </Text>
+          <TouchableOpacity style={styles.buttonAdd} onPress={takePhoto}>
+            <Text style={styles.button}>Take a Picture</Text>
           </TouchableOpacity>
         )}
 

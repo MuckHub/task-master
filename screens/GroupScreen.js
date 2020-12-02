@@ -119,6 +119,7 @@ export default function GroupScreen({ navigation }) {
               {tasksStore.tasks.map((item) => {
                 return (
                   <GroupTasks
+                    key={item.taskId}
                     completed={item.completed}
                     title={item.taskName}
                     navigation={navigation}
