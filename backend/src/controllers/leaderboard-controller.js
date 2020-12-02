@@ -2,6 +2,7 @@ const Group = require('../models/group.model');
 const Task = require('../models/task.model');
 
 const leaderboard = async (req, res) => {
+
   try {
     const allTasks = await Group.findOne({ name: req.body.group });
     let arr = [];
@@ -39,6 +40,7 @@ const leaderboard = async (req, res) => {
         }
       }
     }
+
 
     let finalResult = [];
     for (var prop in counter) {

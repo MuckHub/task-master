@@ -28,7 +28,7 @@ export default function TaskImage(props) {
   async function addLike() {
     setLiked(true);
 
-    const response = await fetch('http://192.168.0.108:3100/likes', {
+    const response = await fetch('http://192.168.88.247:3100/likes', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

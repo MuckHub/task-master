@@ -24,7 +24,6 @@ const allTasks = async (req, res) => {
     }
 
     res.send(arr);
-    console.log(arr);
   } catch (error) {
     return res.json({ error: 'Oops!' });
   }
