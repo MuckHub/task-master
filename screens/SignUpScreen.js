@@ -13,6 +13,7 @@ import {
 import { useDispatch } from 'react-redux';
 import { signUp } from '../redux/actions';
 
+
 const image = {
   uri: '',
 };
@@ -24,7 +25,8 @@ export default function SignUpScreen({ navigation: { goBack } }) {
   const [pass, setPass] = useState('');
 
   async function signupHandler() {
-    const request = await fetch('http://192.168.0.108:3100/register', {
+
+    const request = await fetch('http://192.168.88.247:3100/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
