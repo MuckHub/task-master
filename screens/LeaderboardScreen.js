@@ -14,7 +14,7 @@ console.log('dispatch', group);
 
   async function getBoard() {
 
-    const response = await fetch('http://192.168.43.13:3100/leaderboard', {
+    const response = await fetch('http://192.168.88.247:3100/leaderboard', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

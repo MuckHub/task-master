@@ -25,7 +25,7 @@ export default function AuthScreen({ navigation }) {
     setError(null);
 
 
-    let response = await fetch('http://192.168.43.13:3100/auth', {
+    let response = await fetch('http://192.168.88.247:3100/auth', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

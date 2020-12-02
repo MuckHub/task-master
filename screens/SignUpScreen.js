@@ -25,7 +25,7 @@ export default function SignUpScreen({ navigation: { goBack } }) {
 
   async function signupHandler() {
 
-    const request = await fetch('http://192.168.43.13:3100/register', {
+    const request = await fetch('http://192.168.88.247:3100/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

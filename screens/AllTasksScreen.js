@@ -20,7 +20,7 @@ export default function AllTasksScreen({ navigation }) {
 
   async function getAllTasks() {
 
-    const response = await fetch('http://192.168.43.13:3100/allTasks', {
+    const response = await fetch('http://192.168.88.247:3100/allTasks', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

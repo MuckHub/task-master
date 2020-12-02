@@ -25,7 +25,7 @@ export default function TaskScreen({ route, navigation }) {
 
   async function getPosts() {
 
-    const response = await fetch('http://192.168.43.13:3100/taskName', {
+    const response = await fetch('http://192.168.88.247:3100/taskName', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -79,8 +79,8 @@ export default function TaskScreen({ route, navigation }) {
                         <Image style={styles.avatar} source={avatar} />
                         <Text style={styles.accountName}>{el.login}</Text>
                     </View>
-                   <TaskImage url={el.image} />
-                   <Text style={styles.likes} >Likes:{el.likesCount}</Text>
+                   <TaskImage url={el.image} count={el.likesCount}/>
+                   <Text style={styles.likes} >Likes:{el.likesCount.length}</Text>
                  </View>
                );
              })}
