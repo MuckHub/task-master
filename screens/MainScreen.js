@@ -24,8 +24,7 @@ export default function MainScreen({ navigation }) {
   let groupsStore = useSelector((store) => store.groups);
 
   async function getGroups() {
-
-    const response = await fetch('http://192.168.88.247:3100/account', {
+    const response = await fetch('http://192.168.0.108:3100/account', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -61,6 +60,7 @@ export default function MainScreen({ navigation }) {
                     {groupsStore.map((el) => {
                       return (
                         <GroupPicture
+                          key={el.groupId}
                           name={el.groupName}
                           image={el.img}
                           navigation={navigation}

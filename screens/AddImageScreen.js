@@ -48,8 +48,7 @@ export default function AddImageScreen({ route, navigation: { goBack } }) {
   };
 
   const addPicture = async () => {
-
-    const response = await fetch('http://192.168.88.247:3100/addImg', {
+    const response = await fetch('http://192.168.0.108:3100/addImg', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -68,19 +67,21 @@ export default function AddImageScreen({ route, navigation: { goBack } }) {
       <View style={styles.wrapper}>
         {/* {!image && <Button title='Take a Picture' onPress={takePhoto} />} */}
         {!image && (
-          <TouchableOpacity style={styles.buttonAdd}>
-            <Text style={styles.button} onPress={takePhoto}>
-              Take a Picture
-            </Text>
+          <TouchableOpacity style={styles.buttonAdd} onPress={takePhoto}>
+            <Text style={styles.button}>Take a Picture</Text>
           </TouchableOpacity>
         )}
 
         {image && <Image style={styles.image} source={{ uri: image }} />}
         {/* {image && <Button title='Add' onPress={addPicture} />} */}
 
-        {image && (<TouchableOpacity style={styles.buttonAdd}>
-          <Text style={styles.button} onPress={addPicture}>Add</Text>
-        </TouchableOpacity>)}
+        {image && (
+          <TouchableOpacity style={styles.buttonAdd}>
+            <Text style={styles.button} onPress={addPicture}>
+              Add
+            </Text>
+          </TouchableOpacity>
+        )}
       </View>
     </ImageBackground>
   );

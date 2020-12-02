@@ -33,8 +33,7 @@ export default function TaskScreen({ route, navigation }) {
   const postsRedux = useSelector((store) => store.posts);
 
   async function getPosts() {
-
-    const response = await fetch('http://192.168.88.247:3100/taskName', {
+    const response = await fetch('http://192.168.0.108:3100/taskName', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -67,11 +66,11 @@ export default function TaskScreen({ route, navigation }) {
       style={styles.background}
       source={require('../assets/TaskMaster.jpg')}
     >
-      <ScrollView>
-        <SafeAreaView>
-          <TouchableOpacity style={styles.buttonAdd}>
-            <Text
-              style={styles.button}
+      <ScrollView style={styles.scroll}>
+        <View style={styles.post}>
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity
+              style={styles.buttonAdd}
               onPress={() =>
                 navigation.navigate('AddImage', {
                   taskName: taskName,
@@ -79,9 +78,9 @@ export default function TaskScreen({ route, navigation }) {
                 })
               }
             >
-              ADD
-            </Text>
-          </TouchableOpacity>
+              <Text style={styles.button}>ADD</Text>
+            </TouchableOpacity>
+          </View>
 
           {postsRedux !== undefined && postsRedux.length !== 0 && (
             <View>
@@ -95,7 +94,7 @@ export default function TaskScreen({ route, navigation }) {
                   avatar = require(`../assets/Aleksei.jpg`);
                 }
                 return (
-                  <View style={styles.container}>
+                  <View style={styles.container} key={el.image}>
                     <View style={styles.login}>
                       <Image style={styles.avatar} source={avatar} />
                       <Text style={styles.accountName}>{el.login}</Text>
@@ -106,25 +105,25 @@ export default function TaskScreen({ route, navigation }) {
                       addLike={addLike}
                       count={el.likesCount}
                     />
-
-                    <Image
-                      style={styles.img}
-                      source={
-                        isLiked
-                          ? require('../compenents/ComponentsTaskScreen/pics/heart.png')
-                          : require('../compenents/ComponentsTaskScreen/pics/heart-outline.png')
-                      }
-                    />
-
-                    <Text style={styles.likes}>
-                      Likes:{el.likesCount.length}{' '}
-                    </Text>
+                    <View style={styles.likesContainer}>
+                      <Image
+                        style={styles.img}
+                        source={
+                          isLiked
+                            ? require('../compenents/ComponentsTaskScreen/pics/heart.png')
+                            : require('../compenents/ComponentsTaskScreen/pics/heart-outline.png')
+                        }
+                      />
+                      <Text style={styles.likes}>
+                        Likes: {el.likesCount.length}
+                      </Text>
+                    </View>
                   </View>
                 );
               })}
             </View>
           )}
-        </SafeAreaView>
+        </View>
       </ScrollView>
     </ImageBackground>
   );
@@ -133,22 +132,26 @@ export default function TaskScreen({ route, navigation }) {
 const styles = StyleSheet.create({
   background: {
     alignItems: 'center',
-    height: '100%',
     width: '100%',
+    height: '100%',
     alignSelf: 'stretch',
+    resizeMode: 'cover',
   },
   container: {
     borderWidth: 0,
     borderColor: 'white',
     backgroundColor: 'white',
-    borderRightWidth: 15,
-    borderLeftWidth: 15,
+    borderRightWidth: 10,
+    borderLeftWidth: 10,
     padding: 5,
     marginTop: 20,
     marginBottom: 10,
     borderRadius: 10,
   },
   login: {
+    justifyContent: 'flex-start',
+    alignContent: 'center',
+    alignItems: 'center',
     borderWidth: 18,
     borderColor: 'white',
     fontSize: 20,
@@ -162,18 +165,17 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   accountName: {
-    marginLeft: 30,
-    fontSize: 25,
+    marginLeft: 20,
+    fontSize: 20,
     fontWeight: 'bold',
-    padding: 25,
   },
   avatar: {
-    width: 70,
-    height: 70,
+    width: 45,
+    height: 45,
     borderRadius: 50,
   },
   buttonAdd: {
-    marginLeft: 'auto',
+    marginRight: 20,
     width: '28%',
     backgroundColor: '#fb5b5a',
     borderRadius: 25,
@@ -181,15 +183,36 @@ const styles = StyleSheet.create({
     width: 50,
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 15,
-    marginBottom: 20,
+    marginTop: 5,
+    marginBottom: 10,
   },
   button: {
     color: 'white',
     fontWeight: 'bold',
   },
   img: {
-    width: 40,
-    height: 40,
+    width: 35,
+    height: 35,
+    marginRight: 20,
+    marginLeft: 10,
+  },
+  likesContainer: {
+    justifyContent: 'flex-start',
+    flexDirection: 'row',
+    alignContent: 'center',
+    alignItems: 'center',
+  },
+  scroll: {
+    width: '100%',
+  },
+  post: {
+    padding: 15,
+    marginTop: 20,
+    marginBottom: 10,
+    borderRadius: 10,
+  },
+  buttonContainer: {
+    justifyContent: 'flex-end',
+    flexDirection: 'row',
   },
 });

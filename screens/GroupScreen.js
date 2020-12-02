@@ -36,8 +36,7 @@ export default function GroupScreen({ navigation }) {
   }, [isFocused]);
 
   async function getTasks() {
-
-    const response = await fetch(`http://192.168.88.247:3100/groupTasks`, {
+    const response = await fetch(`http://192.168.0.108:3100/groupTasks`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -50,8 +49,7 @@ export default function GroupScreen({ navigation }) {
   }
 
   async function saveNewTask() {
-
-    const response = await fetch('http://192.168.88.247:3100/newTask', {
+    const response = await fetch('http://192.168.0.108:3100/newTask', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -121,6 +119,7 @@ export default function GroupScreen({ navigation }) {
               {tasksStore.tasks.map((item) => {
                 return (
                   <GroupTasks
+                    key={item.taskId}
                     completed={item.completed}
                     title={item.taskName}
                     navigation={navigation}

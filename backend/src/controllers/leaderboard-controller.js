@@ -23,17 +23,22 @@ const leaderboard = async (req, res) => {
       counter[key] = (counter[key] || 0) + 5;
     });
 
-    
     let allUsers = allTasks.users;
-    
+
     for (let i = 0; i < allUsers.length; i++) {
-      for ( let key in counter) { 
-        if (!(allUsers[i] in counter)) {
+      if (Object.keys(counter).length === 0) {
+        key = allUsers[i];
+        counter[key] = 0;
+        i++;
+      }
+
+      for (let key in counter) {
+        if (!(allUsers[i] in counter) || Object.keys(counter).length === 0) {
           key = allUsers[i];
           counter[key] = 0;
-          i++
+          i++;
         }
-      } 
+      }
     }
 
 
@@ -43,6 +48,7 @@ const leaderboard = async (req, res) => {
         finalResult.push({ login: prop, points: counter[prop] });
       }
     }
+
     res.send(finalResult);
   } catch (error) {
     res.sendStatus(500).end();
