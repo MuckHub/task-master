@@ -13,6 +13,7 @@ import {
 import { useDispatch } from 'react-redux';
 import { signUp } from '../redux/actions';
 
+
 const image = {
   uri: '',
 };

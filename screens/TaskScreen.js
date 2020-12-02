@@ -1,6 +1,16 @@
 import React, { useState, useEffect } from 'react';
 
-import { StyleSheet, Text, View, Button, ScrollView, Image, ImageBackground, SafeAreaView, TouchableOpacity } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  ScrollView,
+  Image,
+  ImageBackground,
+  SafeAreaView,
+  TouchableOpacity,
+} from 'react-native';
 
 import TaskName from '../compenents/ComponentsTaskScreen/TaskName';
 import TaskImage from '../compenents/ComponentsTaskScreen/TaskImage';
@@ -10,9 +20,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useIsFocused } from '@react-navigation/native';
 
 export default function TaskScreen({ route, navigation }) {
-
   const user = useSelector((store) => store.isAuth);
-  
+
   const isFocused = useIsFocused();
 
   useEffect(() => {
@@ -54,42 +63,69 @@ export default function TaskScreen({ route, navigation }) {
   }
 
   return (
-    <ImageBackground style={styles.background} source={require('../assets/TaskMaster.jpg')} >
-          <ScrollView>
-             <SafeAreaView>
-                <TouchableOpacity style={styles.buttonAdd}>
-                      <Text style={styles.button} onPress={()=> navigation.navigate('AddImage', {taskName:taskName, navigation: navigation,})}>ADD</Text>
-                    </TouchableOpacity>
+    <ImageBackground
+      style={styles.background}
+      source={require('../assets/TaskMaster.jpg')}
+    >
+      <ScrollView>
+        <SafeAreaView>
+          <TouchableOpacity style={styles.buttonAdd}>
+            <Text
+              style={styles.button}
+              onPress={() =>
+                navigation.navigate('AddImage', {
+                  taskName: taskName,
+                  navigation: navigation,
+                })
+              }
+            >
+              ADD
+            </Text>
+          </TouchableOpacity>
 
-
-          
           {postsRedux !== undefined && postsRedux.length !== 0 && (
-            <View >
-             {postsRedux.map((el) => {
-               console.log('el', el);
+            <View>
+              {postsRedux.map((el) => {
+                let isLiked = el.likesCount.includes(user);
+
                 let avatar = require(`../assets/def_ava.jpg`);
-                 if (el.login == 'Anton') {
-                    avatar = require(`../assets/Anton.jpg`);
-                  } else if (el.login == 'Aleksei') {
-                    avatar = require(`../assets/Aleksei.jpg`);
-                  }
+                if (el.login == 'Anton') {
+                  avatar = require(`../assets/Anton.jpg`);
+                } else if (el.login == 'Aleksei') {
+                  avatar = require(`../assets/Aleksei.jpg`);
+                }
                 return (
-                 <View style={styles.container}>
+                  <View style={styles.container}>
                     <View style={styles.login}>
-                        <Image style={styles.avatar} source={avatar} />
-                        <Text style={styles.accountName}>{el.login}</Text>
+                      <Image style={styles.avatar} source={avatar} />
+                      <Text style={styles.accountName}>{el.login}</Text>
                     </View>
-                   <TaskImage url={el.image} count={el.likesCount}/>
-                   <Text style={styles.likes} >Likes:{el.likesCount.length}</Text>
-                 </View>
-               );
-             })}
+                    <TaskImage
+                      url={el.image}
+                      taskName={taskName}
+                      addLike={addLike}
+                      count={el.likesCount}
+                    />
+
+                    <Image
+                      style={styles.img}
+                      source={
+                        isLiked
+                          ? require('../compenents/ComponentsTaskScreen/pics/heart.png')
+                          : require('../compenents/ComponentsTaskScreen/pics/heart-outline.png')
+                      }
+                    />
+
+                    <Text style={styles.likes}>
+                      Likes:{el.likesCount.length}{' '}
+                    </Text>
+                  </View>
+                );
+              })}
             </View>
           )}
-           
-      </SafeAreaView>
-
-        </ScrollView>
+        </SafeAreaView>
+      </ScrollView>
     </ImageBackground>
   );
 }
@@ -151,5 +187,9 @@ const styles = StyleSheet.create({
   button: {
     color: 'white',
     fontWeight: 'bold',
+  },
+  img: {
+    width: 40,
+    height: 40,
   },
 });

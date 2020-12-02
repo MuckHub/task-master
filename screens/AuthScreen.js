@@ -78,10 +78,8 @@ export default function AuthScreen({ navigation }) {
             <Text style={styles.forgot}>Forgot Password?</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.loginBtn}>
-            <Text style={styles.loginText} onPress={authHandler}>
-              LOGIN
-            </Text>
+          <TouchableOpacity style={styles.loginBtn} onPress={authHandler}>
+            <Text style={styles.loginText}>LOGIN</Text>
           </TouchableOpacity>
 
           <TouchableOpacity>

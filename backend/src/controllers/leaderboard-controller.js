@@ -11,6 +11,8 @@ const leaderboard = async (req, res) => {
         arr.push(allTasks.tasks[i].completed[y]);
       }
     }
+    console.log(allTasks);
+    console.log('arr', arr);
 
     let result = [];
     for (let el of arr) {
@@ -23,13 +25,28 @@ const leaderboard = async (req, res) => {
       counter[key] = (counter[key] || 0) + 5;
     });
 
+    
+    let allUsers = allTasks.users;
+    
+    for (let i = 0; i < allUsers.length; i++) {
+      for ( let key in counter) { 
+        if (!(allUsers[i] in counter)) {
+          key = allUsers[i];
+          counter[key] = 0;
+          i++
+        }
+      } 
+    }
+    console.log(counter);
+
+
     let finalResult = [];
     for (var prop in counter) {
       if (Object.prototype.hasOwnProperty.call(counter, prop)) {
         finalResult.push({ login: prop, points: counter[prop] });
       }
     }
-    
+    console.log('finalResult', finalResult);
     res.send(finalResult);
   } catch (error) {
     res.sendStatus(500).end();

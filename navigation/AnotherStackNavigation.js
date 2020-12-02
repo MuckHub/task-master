@@ -19,7 +19,11 @@ export default function AnotherStackNavigator() {
         options={{ headerShown: false, gestureEnabled: false }}
       />
       <Stack.Screen name='Task' component={TaskScreen} />
-      <Stack.Screen name='Group' component={GroupScreen} />
+      <Stack.Screen
+        name='Group'
+        component={GroupScreen}
+        options={({ route }) => ({ title: route.params.name })}
+      />
       <Stack.Screen name='Leaderboard' component={LeaderboardScreen} />
       <Stack.Screen name='SignUp' component={SignUpScreen} />
       <Stack.Screen name='AddImage' component={AddImageScreen} />

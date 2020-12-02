@@ -37,14 +37,21 @@ export default function AllTasksScreen({ navigation }) {
   }, []);
 
   return (
-
-    <ImageBackground
-      style={styles.background}
-      source={require('../assets/TaskMaster.jpg')}
+    <ScrollView
+      contentContainerStyle={{
+        flexGrow: 1,
+        justifyContent: 'center',
+        alignContent: 'center',
+        alignItems: 'center',
+        width: '100%',
+      }}
     >
-      <ScrollView style={styles.scroll}>
+      <ImageBackground
+        style={styles.background}
+        source={require('../assets/TaskMaster.jpg')}
+      >
         {allTasksStore !== undefined && (
-          <View>
+          <View style={styles.scroll}>
             {allTasksStore.map((item) => {
               return (
                 <AllTasks
@@ -57,18 +64,21 @@ export default function AllTasksScreen({ navigation }) {
             })}
           </View>
         )}
-      </ScrollView>
-    </ImageBackground>
-
+      </ImageBackground>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   background: {
-    paddingTop: 100,
+    flex: 1,
     alignItems: 'center',
-    height: 1000,
     width: '100%',
+    height: '120%',
     alignSelf: 'stretch',
+    resizeMode: 'cover',
+  },
+  scroll: {
+    height: '100%',
   },
 });

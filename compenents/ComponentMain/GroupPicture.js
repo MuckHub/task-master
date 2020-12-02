@@ -11,7 +11,7 @@ export default function GroupPicture({ name, image, navigation }) {
 
   function getGroupName() {
     dispatch(getGroupNameAC(name));
-    navigation.navigate('Group');
+    navigation.navigate('Group', { name });
   }
 
   return (

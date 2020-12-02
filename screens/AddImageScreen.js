@@ -1,5 +1,14 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Button, Image, Alert, ImageBackground, TouchableOpacity } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  Image,
+  Alert,
+  ImageBackground,
+  TouchableOpacity,
+} from 'react-native';
 import { useSelector } from 'react-redux';
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
@@ -52,12 +61,19 @@ export default function AddImageScreen({ route, navigation: { goBack } }) {
   };
 
   return (
-    <ImageBackground style={styles.background} source={require('../assets/TaskMaster.jpg')} >
+    <ImageBackground
+      style={styles.background}
+      source={require('../assets/TaskMaster.jpg')}
+    >
       <View style={styles.wrapper}>
         {/* {!image && <Button title='Take a Picture' onPress={takePhoto} />} */}
-        {!image && (<TouchableOpacity style={styles.buttonAdd}>
-          <Text style={styles.button} onPress={takePhoto}>Take a Picture</Text>
-        </TouchableOpacity>)}
+        {!image && (
+          <TouchableOpacity style={styles.buttonAdd}>
+            <Text style={styles.button} onPress={takePhoto}>
+              Take a Picture
+            </Text>
+          </TouchableOpacity>
+        )}
 
         {image && <Image style={styles.image} source={{ uri: image }} />}
         {/* {image && <Button title='Add' onPress={addPicture} />} */}
