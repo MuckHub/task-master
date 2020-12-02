@@ -51,7 +51,7 @@ export default function TaskImage(props) {
           source={{
             uri: img,
           }}
-          style={{ width: 300, height: 300 }}
+          style={{ width: 350, height: 350 }}
         />
         {/* <Image
           style={styles2.img}

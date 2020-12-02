@@ -19,8 +19,7 @@ export default function AllTasksScreen({ navigation }) {
   let allTasksStore = useSelector((store) => store.allTasks);
 
   async function getAllTasks() {
-
-    const response = await fetch('http://192.168.88.247:3100/allTasks', {
+    const response = await fetch('http://192.168.0.108:3100/allTasks', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

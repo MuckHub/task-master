@@ -2,7 +2,6 @@ const Group = require('../models/group.model');
 const Task = require('../models/task.model');
 
 const leaderboard = async (req, res) => {
-  console.log(req.body.group);
   try {
     const allTasks = await Group.findOne({ name: req.body.group });
     let arr = [];
@@ -11,8 +10,6 @@ const leaderboard = async (req, res) => {
         arr.push(allTasks.tasks[i].completed[y]);
       }
     }
-    console.log(allTasks);
-    console.log('arr', arr);
 
     let result = [];
     for (let el of arr) {
@@ -25,20 +22,23 @@ const leaderboard = async (req, res) => {
       counter[key] = (counter[key] || 0) + 5;
     });
 
-    
     let allUsers = allTasks.users;
-    
+
     for (let i = 0; i < allUsers.length; i++) {
-      for ( let key in counter) { 
-        if (!(allUsers[i] in counter)) {
+      if (Object.keys(counter).length === 0) {
+        key = allUsers[i];
+        counter[key] = 0;
+        i++;
+      }
+
+      for (let key in counter) {
+        if (!(allUsers[i] in counter) || Object.keys(counter).length === 0) {
           key = allUsers[i];
           counter[key] = 0;
-          i++
+          i++;
         }
-      } 
+      }
     }
-    console.log(counter);
-
 
     let finalResult = [];
     for (var prop in counter) {
@@ -46,7 +46,7 @@ const leaderboard = async (req, res) => {
         finalResult.push({ login: prop, points: counter[prop] });
       }
     }
-    console.log('finalResult', finalResult);
+
     res.send(finalResult);
   } catch (error) {
     res.sendStatus(500).end();

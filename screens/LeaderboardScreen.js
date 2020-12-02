@@ -1,5 +1,11 @@
 import React, { useEffect } from 'react';
-import { StyleSheet, Text, View, ScrollView, ImageBackground } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  ImageBackground,
+} from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { addBoard } from '../redux/actions';
 import Leaderboard from '../compenents/ComponentLeaderboard/Leaderboard';
@@ -8,13 +14,11 @@ export default function LeaderboardScreen({ navigation }) {
   const dispatch = useDispatch();
 
   let group = useSelector((store) => store.groupName);
-  console.log('dispatch', group);
+
   let chartStore = useSelector((store) => store.chart);
 
   async function getBoard() {
-
-    const response = await fetch('http://192.168.88.247:3100/leaderboard', {
-
+    const response = await fetch('http://192.168.0.108:3100/leaderboard', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -22,7 +26,6 @@ export default function LeaderboardScreen({ navigation }) {
       body: JSON.stringify({ group }),
     });
     const chart = await response.json();
-    console.log('chart', chart);
 
     dispatch(addBoard(chart));
   }
@@ -32,7 +35,10 @@ export default function LeaderboardScreen({ navigation }) {
   }, []);
 
   return (
-    <ImageBackground style={styles.background} source={require('../assets/TaskMaster.jpg')}>
+    <ImageBackground
+      style={styles.background}
+      source={require('../assets/TaskMaster.jpg')}
+    >
       <ScrollView style={styles.container}>
         {chartStore !== undefined && (
           <View>
@@ -54,7 +60,7 @@ export default function LeaderboardScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 80, 
+    paddingTop: 80,
   },
   background: {
     flex: 1,
