@@ -29,8 +29,7 @@ const leaderboard = async (req, res) => {
         finalResult.push({ login: prop, points: counter[prop] });
       }
     }
-
-    // console.log(finalResult);
+    
     res.send(finalResult);
   } catch (error) {
     res.sendStatus(500).end();

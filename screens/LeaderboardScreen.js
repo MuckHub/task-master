@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { StyleSheet, Text, View, Button, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, ImageBackground } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { addBoard } from '../redux/actions';
 import Leaderboard from '../compenents/ComponentLeaderboard/Leaderboard';
@@ -8,13 +8,13 @@ export default function LeaderboardScreen({ navigation }) {
   const dispatch = useDispatch();
 
   let group = useSelector((store) => store.groupName);
-console.log('dispatch', group);
+  console.log('dispatch', group);
   let chartStore = useSelector((store) => store.chart);
-  
 
   async function getBoard() {
 
     const response = await fetch('http://192.168.88.247:3100/leaderboard', {
+
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -32,28 +32,36 @@ console.log('dispatch', group);
   }, []);
 
   return (
-    <ScrollView style={styles.container}>
-      {chartStore !== undefined && (
-        <View>
-          <Text>Leaderboard Screen</Text>
-          {chartStore.map((item) => {
-            return (
-              <Leaderboard
-                login={item.login}
-                points={item.points}
-                navigation={navigation}
-              />
-            );
-          })}
-        </View>
-      )}
-    </ScrollView>
+    <ImageBackground style={styles.background} source={require('../assets/TaskMaster.jpg')}>
+      <ScrollView style={styles.container}>
+        {chartStore !== undefined && (
+          <View>
+            {chartStore.map((item) => {
+              return (
+                <Leaderboard
+                  login={item.login}
+                  points={item.points}
+                  navigation={navigation}
+                />
+              );
+            })}
+          </View>
+        )}
+      </ScrollView>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    paddingTop: 80, 
+  },
+  background: {
     flex: 1,
-    backgroundColor: '#fff',
+    alignItems: 'center',
+    width: '100%',
+    height: '120%',
+    alignSelf: 'stretch',
+    resizeMode: 'cover',
   },
 });
