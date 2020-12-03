@@ -36,7 +36,7 @@ export default function GroupScreen({ navigation }) {
   }, [isFocused]);
 
   async function getTasks() {
-    const response = await fetch(`http://192.168.0.108:3100/groupTasks`, {
+    const response = await fetch(`http://192.168.43.13:3100/groupTasks`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -49,7 +49,7 @@ export default function GroupScreen({ navigation }) {
   }
 
   async function saveNewTask() {
-    const response = await fetch('http://192.168.0.108:3100/newTask', {
+    const response = await fetch('http://192.168.43.13:3100/newTask', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
     marginRight: 20,
   },
   roundButton1: {
-    width: 40,
+    width: 60,
     height: 40,
     justifyContent: 'center',
     alignItems: 'center',
@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
   },
   picture: {},
   button: {
-    width: '35%',
+    width: '45%',
     backgroundColor: '#fb5b5a',
     borderRadius: 25,
     height: 50,
@@ -177,13 +177,16 @@ const styles = StyleSheet.create({
   textLeaderboard: {
     color: 'white',
     fontWeight: 'bold',
+    width: 120,
+    paddingLeft: 15,
+    fontSize: 18
   },
   buttons: {
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
   add: {
-    width: '28%',
+    width: '38%',
     backgroundColor: '#fb5b5a',
     borderRadius: 25,
     height: 50,
@@ -195,6 +198,7 @@ const styles = StyleSheet.create({
   textAdd: {
     color: 'white',
     fontWeight: 'bold',
+    fontSize: 18
   },
   input: {
     height: 60,

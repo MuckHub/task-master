@@ -22,9 +22,10 @@ export default function MainScreen({ navigation }) {
   const dispatch = useDispatch();
 
   let groupsStore = useSelector((store) => store.groups);
+  console.log('groupsStore mainScreen --------', groupsStore);
 
   async function getGroups() {
-    const response = await fetch('http://192.168.0.108:3100/account', {
+    const response = await fetch('http://192.168.43.13:3100/account', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -54,7 +55,7 @@ export default function MainScreen({ navigation }) {
               </View>
 
               <View style={styles.groups}>
-                <Groups />
+                <Groups navigation={navigation} />
                 <GroupContainer>
                   <View style={styles.items}>
                     {groupsStore.map((el) => {
@@ -91,8 +92,8 @@ const styles = StyleSheet.create({
   groups: {
     flex: 1,
     borderRadius: 30,
-    margin: 20,
-    height: 450,
+    margin: 5,
+    // height: 450,
     borderWidth: 0,
     backgroundColor: '#fff',
   },
@@ -101,6 +102,9 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     flex: 1,
     justifyContent: 'center',
+    width: 350,
+    paddingRight: 5,
+    paddingLeft: 5,
   },
   image: {
     flex: 1,

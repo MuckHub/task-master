@@ -7,7 +7,7 @@ export const Groups = ({ navigation }) => {
     <View style={styles.text}>
       <Text style={styles.accountName}>Groups</Text>
       <TouchableOpacity style={styles.add}>
-        <Text style={styles.textAdd}>Add new</Text>
+        <Text style={styles.textAdd} onPress={() => navigation.navigate('AddGroup')}>Add new</Text>
       </TouchableOpacity>
     </View>
   );
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   },
   picture: {},
   add: {
-    width: '28%',
+    width: '35%',
     backgroundColor: '#fb5b5a',
     borderRadius: 25,
     height: 50,
@@ -51,5 +51,6 @@ const styles = StyleSheet.create({
   textAdd: {
     color: 'white',
     fontWeight: 'bold',
+    fontSize: 20
   },
 });

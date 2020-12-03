@@ -7,6 +7,7 @@ import TaskScreen from '../screens/TaskScreen';
 import LeaderboardScreen from '../screens/LeaderboardScreen';
 import SignUpScreen from '../screens/SignUpScreen';
 import AddImageScreen from '../screens/AddImageScreen';
+import AddGroupScreen from '../screens/AddGroupScreen';
 
 const Stack = createStackNavigator();
 
@@ -27,6 +28,7 @@ export default function AnotherStackNavigator() {
       <Stack.Screen name='Leaderboard' component={LeaderboardScreen} />
       <Stack.Screen name='SignUp' component={SignUpScreen} />
       <Stack.Screen name='AddImage' component={AddImageScreen} />
+      <Stack.Screen name='AddGroup' component={AddGroupScreen} />
     </Stack.Navigator>
   );
 }

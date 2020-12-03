@@ -18,7 +18,7 @@ export default function LeaderboardScreen({ navigation }) {
   let chartStore = useSelector((store) => store.chart);
 
   async function getBoard() {
-    const response = await fetch('http://192.168.0.108:3100/leaderboard', {
+    const response = await fetch('http://192.168.43.13:3100/leaderboard', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

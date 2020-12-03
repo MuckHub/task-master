@@ -1,6 +1,7 @@
 const Group = require('../models/group.model');
 
 const addNewTask = async (req, res) => {
+  console.log(req.body);
   try {
     const group = await Group.findOne({ name: req.body.group });
     if (group) {

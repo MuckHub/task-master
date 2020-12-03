@@ -33,8 +33,8 @@ const styles = StyleSheet.create({
     width: 130,
     height: 130,
     borderRadius: 10,
-
     zIndex: 1,
+    paddingRight: 5,
   },
   text: {
     justifyContent: 'center',
@@ -43,8 +43,10 @@ const styles = StyleSheet.create({
     color: '#fb5b5a',
     fontWeight: 'bold',
     marginTop: 5,
+    fontSize: 18,
   },
   item: {
+    flexDirection: 'column',
     justifyContent: 'center',
     alignSelf: 'center',
     alignItems: 'center',
