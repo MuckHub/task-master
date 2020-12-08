@@ -10,10 +10,10 @@ https://github.com/KetiRudneva
 https://github.com/antonsipin
 
 <p align="center">
-  <img src="assets/1" width="350" title="Экран регистрации">
-  <img src="assets/2" width="350" alt="Аккаунт пользователя">
-  <img src="assets/3" width="350" title="Экран добавления задачи">
-  <img src="assets/4" width="350" alt="Лента. Возвожность добавить фотографию и поставить лайк.">
+  <img src="assets/1" width="300" title="Экран регистрации">
+  <img src="assets/2" width="300" alt="Аккаунт пользователя">
+  <img src="assets/3" width="300" title="Экран добавления задачи">
+  <img src="assets/4" width="300" alt="Лента. Возвожность добавить фотографию и поставить лайк.">
 </p>
 
 
