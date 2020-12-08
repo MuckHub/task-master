@@ -9,8 +9,12 @@ https://github.com/KetiRudneva
 
 https://github.com/antonsipin
 
+<p align="center">
+  <img src="assets/1" width="350" title="Экран регистрации">
+  <img src="assets/2" width="350" alt="Аккаунт пользователя">
+</p>
 
-![alt text](assets/1 "Экран регистрации")
+
 
 
 
