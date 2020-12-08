@@ -1,6 +1,6 @@
 <h1>Task Master</h1> 
 Развлекательное приложение под iOS и Android. Приложение для общения с друзьями и коллегами, обмена фотографиями выполненных заданий, просмотра выполненных заданий друзей, подсчёта рейтинга, обмена лайками.
-Techs: HTML, CSS, JavaScript, Express.js, Node.js, MongoDB, React Native, Redux.
+<strong>Techs: HTML, CSS, JavaScript, Express.js, Node.js, MongoDB, React Native, Redux </strong>
 
 <h3>Команда</h3>
 
