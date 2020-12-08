@@ -11,6 +11,7 @@ https://github.com/KetiRudneva
 https://github.com/antonsipin
 
 <p align="center">
+  <img src="assets/GIF" width="300" title="Экран регистрации">
   <img src="assets/1" width="300" title="Экран регистрации">
   <img src="assets/2" width="300" alt="Аккаунт пользователя">
   <img src="assets/3" width="300" title="Экран добавления задачи">
