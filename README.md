@@ -10,7 +10,7 @@ https://github.com/KetiRudneva
 https://github.com/antonsipin
 
 
-![alt text](assets/1.jpeg "Экран регистрации")
+![alt text](assets/1 "Экран регистрации")
 
 
 
