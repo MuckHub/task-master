@@ -10,6 +10,8 @@ https://github.com/KetiRudneva
 
 https://github.com/antonsipin
 
+<hr>
+
 <p align="center">
   <video src="assets/GIF.mp4" type='video/mp4' title="GIF">
   <img src="assets/1" width="300" title="Экран регистрации">
