@@ -14,6 +14,7 @@ https://github.com/antonsipin
   <img src="assets/2" width="300" alt="Аккаунт пользователя">
   <img src="assets/3" width="300" title="Экран добавления задачи">
   <img src="assets/4" width="300" alt="Лента. Возвожность добавить фотографию и поставить лайк.">
+  <img src="assets/5" width="300" alt="Список всех задач">
 </p>
 
 
